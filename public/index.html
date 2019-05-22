@@ -1,252 +1,660 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="preload"
-      href="/fonts/zdfonts.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin="anonymous"
-    />
-    <script>
-function viewChange(value) {
-  document.getElementById('react').classList.add('visHid');
-  document.getElementById('ticList').classList.add('visHid');
-  document.getElementById('ticDet').classList.add('visHid');
 
-  document.getElementById(value).classList.remove('visHid');
+<!-- saved from url=(0056)https://www.zoho.com/desk/extensions/guide/#introduction -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <link href="https://img.zohostatic.com/support/app/images/support-2.008c83e778aa58385b26.ico" rel="shortcut icon">
+  <title>Zoho Desk | Developers doc</title>
+<link rel="canonical" href="https://www.zoho.com/desk/extensions/guide/">
+
+
+
+
+  <link href="./css" rel="stylesheet" type="text/css">
+    <link href="./style.css" rel="stylesheet" media="screen">
+    <link href="./print.css" rel="stylesheet" media="print">
+   <script type="text/javascript">
+     (function (p,o,s,t,m,a,n) {
+       !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+       !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+         (n = o.createElement("script")),
+         (n.id = s+t), (n.async = 1), (n.src = m), n
+       ));
+     }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+    </script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script id="_pmPostmanRunObject" async="" src="./button.js"></script>
+ 
+
+
+</head>
+
+<style>
+  
+
+  .top-band .title {
+    margin: 12px 5px;
+    float: left;
+    font-size: 15px;
 }
-</script>
-    <style>
-    #contacts,#hq,#ticList
-      {
-        width:90%;
-        height:800px;
-        padding: 10px;
-        border: 1px solid #000;
-        margin: 20px auto;
-      }
+.content h1:before
+{
+  margin-top: 0px !important  ;
+}
 
-      #react
-      {
-          margin: 50px 10px;
-      }
-      main
-      {
-        height: 100vh;
-        width:100vw;
-        display: flex;
-        flex-direction: column
-      }
-      .header
-      {
-        padding: 10px;
-        background: #000;
-        color: #fff;
-      }
-      .container
-      {
-        flex:1;
-        display: flex;
-      }
-      .lft
-      {
-        width: 220px;
-        border-right: 1px solid #ddd;
-        height: 100%;
-      }
-      .rgt
-      {
-        flex: 1;
-        margin-top: 0;
+</style>
 
-        overflow: auto;
-        padding: 50px;
-        box-sizing: border-box
-      }
-      .lft div
-      {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-        border-top: 1px solid #ddd;
-        display: block;
-        margin-bottom: 20px;
-        cursor: pointer;
-      }
-      .visHid
-      {
-        visibility: hidden !important;
-        height: 0px !important;
-        width: 0px !important;
-        overflow: hidden !important;
-        margin: 0px !important;
-      }
-      </style>
-  </head>
-  <body>
+<body class="index">
 
 
-    <main>
-      <div class="header">Embed Funcional Component</div>
-      <div class="container">
-          <div class="lft">
-            <div onclick="viewChange('react')">Desk App </div>
-            <div onclick="viewChange('ticList')">Ticket List </div>
-            <div onclick="viewChange('ticDet')">Ticket Detail </div>
-          </div>
-          <div class="rgt">
 
-              <div id="react" class="visHid"></div>
-              <div id='ticList' class="visHid"></div>
-              <div id="ticDet" class="visHid"></div>
-              <div id="hq" class="visHid"></div>
-              <div id="contactsbyticket" class="visHid"></div>
+<!-- Header -->
+  <div class="top-band">
+    <div class="top-band">
+      <span id="navbar-toggle">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M-.5 178v56h512v-56H-.5zm0 195h512v-57H-.5v57zm0 138h512v-56H-.5v56z"></path></svg>
+      </span>
+      <a href="https://www.zoho.com/desk/" id="logo">
+        <img name="logo" src="https://img.zohostatic.com/support/app/images/logo.3b82871801fec2d02ebb.png" alt="Zoho Desk">
+      </a>
+      <span class="title">Embedded Functional Component</span>
 
-          </div>
       </div>
-    </main>
+</div>
 
 
 
 
-    <script>
-    var staticDomain = {
-  js: '/',
-  css: '/',
-  images: '/',
-  fonts: '/'
-};
+<!-- Left panel -->
 
-var devURLParam = 'https://localhost:9090/';
-</script>
-    <script>
-    function ZOHODESK(ZD) {
-  ZD.setConfig({
-    clientId: '1000.DTSGFR00VEAN59566GK2ICOGM57MNH',
-    redirectUri:
-      'https://mahesh-zt151.tsi.zohocorpin.com:9090/api/auth/redirect',
-    container: document.querySelector('#react'),
-    organizationName: 'maheshefc',
-    style: `
-          desk{
-            background:#fff;
-            height:700px;
-          }
-          #react
+
+
+<div class="tocify-wrapper" id='tocify-wrapper'>
+  <div>
+    <ul>
+      
+        <li>
+            <span class="accordion">
+              <a data-uniq-element="INTRODUCTION">
+                Introduction
+            </a>
+          </span>
+        </li>
+
+
+         <li>
+            <span class="accordion">
+              <a data-uniq-element="QUICKSTART">
+                Quick Start
+            </a>
+          </span>
+        </li>
+
+        <li>
+            <span class="accordion">
+              <a data-uniq-element="CONFIGURATIONOBJECT">
+                Configuration
+
+
+                <span class="arrow-down-open">
+                     <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                     <polygon points="255.5,450 1.5,193.2 1.5,255.2 255.5,512 509.5,255.2 509.5,193.2 "></polygon>
+                   </svg>
+                 </span>
+
+
+                 <span class="arrow-right-open">
+                   <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                   <g id="Layer_2_2_">
+                     <path d="M156.5,501.8l232.8-230.9c8.5-8.5,8.5-22.3,0-31.8L156.5,8.3c-4-3-9.5-5.3-15.2-5.3l0,0c-19.3,0-28.9,23.4-15.2,37.1
+                     l217.3,215.4L126.1,471c-13.7,13.6-4.1,37.1,15.2,37.1l0,0C147,508,152.4,505.8,156.5,501.8z"></path>
+                   </g>
+                 </svg>
+               </span>
+
+            </a>
+
+
+
+            <ul class="panel">
+                <li class="item active"><a data-uniq-element="AUTHENTICATIONFLOW">Authentication</a></li>
+                <li class="item"><a data-uniq-element="CLIENTSIDEOAUTH2">OAUTH</a></li>
+                <li class="item"><a data-uniq-element="GETAUTHTOKENMETHOD">Get AuthToken </a></li>
+          </ul>
+
+
+
+          </span>
+        </li>
+
+
+         <li>
+            <span class="accordion">
+              <a data-uniq-element="LANGUAGESUPPORT">
+                Language Support
+            </a>
+          </span>
+        </li>
+
+
+
+
+        <li>
+            <span class="accordion">
+              <a data-uniq-element="ZOHODESKAPIMETHODS">
+                API methods
+            </a>
+          </span>
+        </li>
+
+
+
+
+
+
+         <li>
+            <span class="accordion">
+              <a data-uniq-element="EFCCONTAINERS">
+               EFC Containers
+
+                <span class="arrow-down-open">
+                     <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                     <polygon points="255.5,450 1.5,193.2 1.5,255.2 255.5,512 509.5,255.2 509.5,193.2 "></polygon>
+                   </svg>
+                 </span>
+
+
+                 <span class="arrow-right-open">
+                   <svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                   <g id="Layer_2_2_">
+                     <path d="M156.5,501.8l232.8-230.9c8.5-8.5,8.5-22.3,0-31.8L156.5,8.3c-4-3-9.5-5.3-15.2-5.3l0,0c-19.3,0-28.9,23.4-15.2,37.1
+                     l217.3,215.4L126.1,471c-13.7,13.6-4.1,37.1,15.2,37.1l0,0C147,508,152.4,505.8,156.5,501.8z"></path>
+                   </g>
+                 </svg>
+               </span>
+
+            </a>
+
+
+
+            <ul class="panel">
+                <li class="item"><a data-uniq-element="TICKETLISTRENDER">Tickets List</a></li>
+                <li class="item"><a data-uniq-element="TICKETDETAILSRENDER">Ticket detail</a></li>
+                <li class="item"><a data-uniq-element="HEADQUARTERSRENDER">Headquarters Report</a></li>
+          </ul>
+
+
+
+          </span>
+        </li>
+
+
+
+
+        <li>
+            <span class="accordion">
+              <a data-uniq-element="UNMOUNTEFCCOMPONENT">
+                Remove Container
+            </a>
+          </span>
+        </li>
+
+
+        <li>
+            <span class="accordion">
+              <a data-uniq-element="NOTE">
+                Note
+            </a>
+          </span>
+        </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+<!-- right side -->
+
+
+<div class="page-wrapper" id="page-wrapper">
+  
+  <div class="dark-box"></div>
+  <div class="content">
+    
+
+    <div id="fixed-band" class="fixed-band">Introduction</div>
+
+
+
+    <h1 id="INTRODUCTION">ZohoDesk Embedded Functional Component</h1>
+
+    <p>You may easily embed ZohoDesk functionality into your website in few minutes. Below section guides you to make integration easy</p>
+
+
+<!-- introduction -->
+    <h1 id="INTRODUCTION">Introduction</h1>
+    <p>Zohodesk EFC(Embedded Functional Component) is javascript SDK. It provides the following set of features/functionality:</p>
+    <ol>
+      <ul>
+        <li>Full Zoho Desk App</li>
+        <li>Tickets List</li>
+        <li>Ticket Detail</li>
+        <li>Headquarter Dashboard</li>
+      </ul>
+    </ol>
+
+    <p>As of now, the above features are available. The Quickstart section explains how to setup EFC in your website</p>
+
+
+
+<!-- Quick Start -->
+
+    <div name="Quick Start" class="resource"></div>
+    <h1 id="QUICKSTART">Quick Start</h1>
+
+
+
+    <pre class="highlight conf prettyprint">
+        <div><code>
+/*snippet*/
+&lt;script>
+        function ZOHODESK(ZD) 
           {
-          },
+            ZD.setConfig({
+              clientId: &lt;client-id>,
+              redirectUri: &lt;redirect-url>,
+              organizationName: &lt;orgName>,
+              container: &lt;dom element>,
+            });
+          }
+ &lt;/script>
 
-          `
-  });
-}
 
-(() => {
-  let i18n = {
-    'ar_SA.js': 'ar_SA.f3d89539f31a85cdd5fa.js',
-    'da_DK.js': 'da_DK.e7f846fc1b831644191a.js',
-    'de_DE.js': 'de_DE.f27782f8354516cc8970.js',
-    'en_GB.js': 'en_GB.15cc900d92fac74fa1d6.js',
-    'en_US.js': 'en_US.04940946fb4b4b61f9f6.js',
-    'es_ES.js': 'es_ES.3a38e0769fb01f882fc4.js',
-    'es_MX.js': 'es_MX.4a7b29063c958673b3e5.js',
-    'fr_FR.js': 'fr_FR.750f7cac67e3f03e12b6.js',
-    'it_IT.js': 'it_IT.b84d1aabb4cbcadbed8c.js',
-    'ja_JP.js': 'ja_JP.1b28595c7de7d1aa1550.js',
-    'nl_NL.js': 'nl_NL.ecd8752a4914ff8c72d7.js',
-    'pl_PL.js': 'pl_PL.83b1f642cda8e0ba9fb2.js',
-    'pt_BR.js': 'pt_BR.fa34baacbe8df75fcd0f.js',
-    'pt_PT.js': 'pt_PT.1086f6d1f24d54045fba.js',
-    'ru_RU.js': 'ru_RU.53c2614a6973bd4acc43.js',
-    'sv_SE.js': 'sv_SE.37201b5b23012ddff222.js',
-    'tr_TR.js': 'tr_TR.2304fa7342828fde6c73.js',
-    'vi_VN.js': 'vi_VN.105217c3e87d964bf4eb.js',
-    'zh_CN.js': 'zh_CN.52b2716a7b6ddf470fa5.js'
-  };
-  let langEle = document.querySelector('[data-efc-locale]');
-  let lang = langEle
-    ? langEle.getAttribute('data-efc-locale') + '.js'
-    : 'en_US.js';
-  let prod = false;
-  let assetURL = prod
-    ? 'https://localjs.zohostatic.com/support/build/zohostatic'
-    : 'https://mahesh-zt151.tsi.zohocorpin.com:9090';
-  window.staticDomain = {
-    //hook
-    js: assetURL + '/'
-  };
-  let css = prod ? 'css/efc.13d68824495da763b06e.css' : 'css/efc.css';
-  let js = prod
-    ? [
-        'i18n/' + i18n[lang],
-        'js/runtime~efc.59cce15908d2781cb855.js',
-        'js/vendor.0e0bdaed94b89278bd7c.js',
-        'js/react.vendor.b490666683d8c92b929b.js',
-        'js/efc.13d68824495da763b06e.js'
-      ]
-    : ['i18n/en_us.js', 'js/vendor.js', 'js/react.vendor.js', 'js/efc.js'];
-  let loadAsset = (id, type, url) => {
-    return new Promise((res, rej) => {
-      el = document.createElement(type);
-      el.id = id;
-      el.onload = res;
-      el.error = rej;
-      if (type == 'script') {
-        el.src = assetURL + '/' + url;
-        el.defer = 'defer';
+&lt;script 
+      data-efc-locale="en_US" 
+      src="https://js.zohostatic.com/support/build/zohostatic/zohodesk-efc-sdk-v1.0.0.js">
+&lt;script>
 
-        document.body.appendChild(el);
-      } else if (type == 'link') {
-        el.href = assetURL + '/' + url;
-        el.rel = 'stylesheet';
-        document.head.appendChild(el);
-      }
-    });
-  };
-  ZOHODESK.onload = (cb, err) =>
-    Promise.all([
-      loadAsset('zd-css-1', 'link', css),
-      ...js.map((url, index) => loadAsset('zd-js-' + index, 'script', url))
-    ]).then(() => ZOHODESK.onBasicLoad(cb));
-})();
-</script>
-    <script>
+            </code>
+            </div>
+      </pre>
+
+
+
+
+    <p>You can include the piece of JavaScript code into your website that will initialize Zohodesk into your website.</p>
+
+
+
+
+
+
+
+
+
+
+    <p>You have to create client using the following <a target="_blank" href="https://accounts.zoho.com/developerconsole">Link</a>. This will give the clientId and secret key.</p>
+
+
+
+ 
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <p> <strong>Note:</strong> </p>
+
+      <ul>
+          <li>While create client choose "Client Type" as "javascript"</li>
+          <li>"ZOHODESK" method should be exist in the window object before loading "zohodesk-efc-sdk" js. EFC SDK calls "ZOHODESK" method and provides ZD Object. ZD Object has setConfig method. This method is used to initialize configuration for zohodesk.</li>
+      </ul>
+      
+      
+
+
+
+
+       
+
+
+
+
+<!-- Configuration object -->
+   <div name="Configuration Object" class="resource"></div>
+   <h1 id="CONFIGURATIONOBJECT">Configuration Object</h1>
+
+    <p>
+      <strong>Configuration Object has following properties:</strong>
+      <br>
+      <ul>
+          <li>clientId - To identify integrator. creation of client id mention in the Quick Start section</li>
+
+          <li>redirectUri - You get the access token in the redirect url after hash. ex https://yourdomain.com/redirect#access_token=<token>&scope=. You provide redirect url while creating client. Zoho accounts validate your credentials and send access token to redirect url. Redirect url should be same as in the client creation</li>
+
+          <li>organizationName - If you are mention this param it will render our EFC corresponding organization, If you not mention here it will be render the EFC based on your default org selection.</li>
+
+          <li>container - If you give the DOM element it will render Full deskApp in this DOM element</li>
+          <li>style - If you want customize zohodesk style you use this config param</li>
+      </ul>
+    </p>
+
+
+      <pre class="highlight conf prettyprint">
+        <div>
+        <code>
+          
+                  {
+                      clientId: <client-id>,
+                      redirectUri: <redirect-url>,
+                      (or)
+                      getAccessToken:<override style>,
+                      organizationName: <orgName>,
+                      container: <dom element>,
+                      style:<override style>,
+                  }
+        </code>
+      </div>
+      </pre>
+
+
+
+
+   
+
+   <!-- AUTHENTICATION FLOW -->
+
+
+
+    <div name="Authentication" class="resource"></div>
+    <h1 id="AUTHENTICATIONFLOW">Authentication </h1>
+    <p><strong>There are two ways to authenticate zohodesk</strong></p>
+    <ul>
+      <li>Client side Oauth2</li>
+      <li>getAccessToken method</li>
+    </ul>
+
+
+   <!-- CLIENT SIDE OAUTH2-->
+
+    <div name="CLIENTSIDEOAUTH2" class="resource"></div>
+    <h1 id="CLIENTSIDEOAUTH2">OAUTH </h1>
+
+    <p>If you don't want to handle getting access token then this approach is very useful to you. You don't need to think of oauth2 flow for getting access token. While render zohodesk it will open the popup and ask user credential. Once user provides him/her credential. It redirect to redirect url with access token. sdk get access token from redirect url. You must note redirect url must match with your domain. otherwise CORS error will throw sdk can't get access token.</p>
+
+    <ul>
+      <li><a href="https://www.zoho.com/accounts/protocol/oauth.html">Client Registration</a></li>
+      <li><a href="https://www.zoho.com/accounts/protocol/oauth/js-apps/protocol-flow.html">Client Oauth Flow</a></li>
+      <li><a href="https://www.zoho.com/accounts/protocol/oauth/js-apps/access-token.html">Getting Access Token</a></li>
+    </ul>
+
+
+
+   <!--GETACCESSTOKEN METHOD-->
+
+
+
+  <div name="GETACCESSTOKEN" class="resource"></div>
+    <h1 id="GETAUTHTOKENMETHOD">Get AuthToken </h1>
+
+    <p>In the above case, integrator won't worry about getting access token. But It is not suitable for all. Sometimes integrator shared common access token between all user. In the above configuration that was not possible. Instead you may provide javascript method to get the access token. That method should return a promise. Promise response should be following format.</p>
+
+       <pre class="highlight conf prettyprint">
+         <div>
+        <code>
+            {
+                expire:"1000*60*60",//one hour in milliseconds
+                authToken:""
+            }
+        </code>
+      </div>
+      </pre>
+
+
+
+
+
+   <!--Language support -->
+
+
+
+    <div name="LANGUAGESUPPORT" class="resource"></div>
+    <h1 id="LANGUAGESUPPORT">Language Support </h1>
+    <p>You can also possible to change the language for EFC. You can mention "data-efc-locale" param in script link tag. It loads "en_US" language as default. We are not providing any option to change language after sdk loaded. In future we may provide option to switch between languages.</p>
+
+
+
+       <pre class="highlight conf prettyprint prettyprinted">
+         <div>
+          <code>
+&lt;script 
+
+        data-efc-locale='ar_SA | da_DK | de_DE | en_GB | en_US | es_ES | es_MX  | fr_FR | it_IT | ja_JP | nl_NL | pl_PL | pt_BR | pt_PT | ru_RU | sv_SE | tr_TR | vi_VN | zh_CN' 
+        
+  src='https://localjs.zohostatic.com/support/build/zohostatic/zohodesk-efc-sdk-v1.0.0.js' >
+        
+        
+&lt;/script>
+          </code>
+        </div>
+      </pre>
+
+
+
+
+   <!--ZOHODESK API METHODS -->
+
+    <div name="ZOHODESKAPIMETHODS" class="resource"></div>
+    <h1 id="ZOHODESKAPIMETHODS">Zohodesk API methods </h1>
+    <p><strong>Methods</strong></p>
+    <ul>
+        <li>ZOHODESK.onload</li>
+      <li>ZOHODESK.routeTo</li>
+      <li>ZOHODESK.get</li>
+    </ul>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <ul>
+        <li>onload - This method will be trigger after our zohodesk sdk loaded into your website </li>
+      <li>routeTo - If you want the change view in EFC you can give the data via routeTo method.It will be change the view for EFC.</li>
+      <li>get - If you are want to get the information from our EFC you can use the ZOHODESK.get method.</li>
+    </ul>
+
+           <pre class="highlight conf prettyprint">
+             <div>
+            <code>
+  Get the Department Name
+
+        ZOHODESK.get('routing.paramMap.deptName')
+
+
+
+
+Set the URL param for ZohoDesk efc,
+
+
+        some of the urls
+        /agent/:sanitizedOrgname/:sanitizedDepartmentName/:sanitizedModuleName/(list|queue)/:sanitizedViewName
+        ZOHODESK.routeTo(obj)
+
+
+
+        Instead of create full url. we support some short url. example ticket detail view redirect format
+        {
+            name:"ticketdetail",
+            id:""
+        }
+
+        common format
+        {
+            pathname,
+            search,
+            hash,
+            state
+        }
+                        
+            </code>
+          </div>
+          </pre>
+
+
+
+
+
+
+   <!--EFCCONTAINERS-->
+
+    <div name="EFCCONTAINERS" class="resource"></div>
+    <h1 id="EFCCONTAINERS">EFC Containers </h1>
+
+     <p> Here the list of EFC containers,You have very easy to embed those containers into your websites </p>
+
+
+
+   <!--TICKETLISTRENDER-->
+
+      <div name="TICKETLISTRENDER" class="resource"></div>
+    <h1 id="TICKETLISTRENDER">Tickets List </h1>
+
+<p>If you want render the Ticket List Items refer the below code snippet.It's working based on the queries that you are mention your code.You can refer the queries posibilities in this link. You can render our ListItems based on the department ID.
+
+</p>
+
+
+       <pre class="highlight conf prettyprint">
+         <div>
+        <code>
+ZOHODESK.onload(() => {
+
+        let deptId = ZOHODESK.get(
+        'departmentMapper.' + ZohoDesk.get('routing.paramMap.deptName')
+      );
+
+
+      ZOHODESK.renderContainer(
+        'ListItems',
+        {
+              deptId: deptId,
+              module: 'tickets',
+              queries: [
+                {
+                  condition: <Condition>,
+                  fieldName: <Field Name>,
+                  value: <value>,
+                }
+              ]
+        },
+        document.getElementById( DOM Element )
+      );
+
+)}
+
+        </code>
+      </div>
+      </pre>
+
+
+
+
+   <!--TICKETDETAILSRENDER-->
+
+    <div name="TICKETDETAILSRENDER" class="resource"></div>
+    <h1 id="TICKETDETAILSRENDER">Ticket Detail</h1>
+
+<p>You can render our Ticket details view by using following code snippet. It's working based on the TicketId that you are given. Here also possible render the Ticket Peek View Also.
+
+</p>
+
+
+
+
+
+       <pre class="highlight conf prettyprint">
+         <div>
+        <code>
   ZOHODESK.onload(() => {
-  viewChange('react');
-  // try {
-  //   let deptId = ZOHODESK.get(
-  //     'departmentMapper.' + ZOHODESK.get('routing.paramMap.deptName')
-  //   );
-  //   ZOHODESK.renderContainer(
-  //     'TicketDetailview',
-  //     {
-  //       id: '402000042622145'
-  //     },
-  //     document.getElementById('ticDet')
-  //   );
+        ZOHODESK.renderContainer(
+            'TicketDetailview',
+            {
+              id: <Ticket ID>,
+              isPeekView:<boolean> //optional
+            },
+            document.getElementById(<DOM Element>)
+          );
+  )}
 
-  //   ZOHODESK.renderContainer('HQDashboard', {}, document.getElementById('hq'));
+                    
+        </code>
+      </div>
+      </pre>
 
-  //   ZOHODESK.renderContainer(
-  //     'ListItems',
-  //     {
-  //       deptId: "402000006623095",
-  //       module: 'tickets',
-  //       queries: [
-  //         {
-  //           condition: 'is',
-  //           fieldName: 'Email',
-  //           value: ['yuvaraj_baskaran+3@yahoo.com']
-  //         }
-  //       ]
-  //     },
-  //     document.getElementById('ticList')
-  //   );
-  // } catch (e) {
-  //   console.log('error in ur html file....', e);
-  // }
-});
-</script>
-  </body>
-</html>
+   <!--HEADQUARTER RENDER-->
+
+
+    <div name="HEADQUARTERSRENDER" class="resource"></div>
+    <h1 id="HEADQUARTERSRENDER">Headquarters Report</h1>
+
+    <p>If you want render the Headquarter report refer the below code snippet.</p>
+
+  
+       <pre class="highlight conf prettyprint">
+         <div>
+        <code>
+  ZOHODESK.onload(() => {
+
+      ZohoDesk.renderContainer('HQDashboard', {}, document.getElementById(<DOM Element>));
+
+    )}
+
+                    
+        </code>
+      </div>
+      </pre>
+
+
+   <!--UNMOUNT EFC COMPONENT -->
+
+    <div name="UNMOUNTEFCCOMPONENT" class="resource"></div>
+    <h1 id="UNMOUNTEFCCOMPONENT">Remove Container</h1>
+
+    <p>If you want to unmount the our EFC from document you can use the below code</p>
+
+    <pre class="highlight conf prettyprint">
+      <div>
+        <code>
+              ZOHODESK.removeContainer(<DOM Element>)
+                    
+        </code>
+      </div>
+      </pre>
+
+
+   <!--NOTE-->
+
+ <div name="NOTE" class="resource"></div>
+    <h1 id="NOTE">Notes</h1>
+
+    <p>We are using some of the global variables -i18n -deskjsonp -ZohoDesk -ZDE</p>
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+
+<script src="https://www.zoho.com/desk/extensions/guide/js/script.js"></script>
+</body></html>
