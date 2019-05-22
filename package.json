@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/zohodesk-sdk/desk/issues"
   },
-  "homepage": "https://github.com/zohodesk-sdk/desk#readme"
+  "homepage": "https://github.com/zohodesk-sdk/desk#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }
