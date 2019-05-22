@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/fonts/zdfonts.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+    <script>
+function viewChange(value) {
+  document.getElementById('react').classList.add('visHid');
+  document.getElementById('ticList').classList.add('visHid');
+  document.getElementById('ticDet').classList.add('visHid');
+
+  document.getElementById(value).classList.remove('visHid');
+}
+</script>
+    <style>
+    #contacts,#hq,#ticList
+      {
+        width:90%;
+        height:800px;
+        padding: 10px;
+        border: 1px solid #000;
+        margin: 20px auto;
+      }
+
+      #react
+      {
+          margin: 50px 10px;
+      }
+      main
+      {
+        height: 100vh;
+        width:100vw;
+        display: flex;
+        flex-direction: column
+      }
+      .header
+      {
+        padding: 10px;
+        background: #000;
+        color: #fff;
+      }
+      .container
+      {
+        flex:1;
+        display: flex;
+      }
+      .lft
+      {
+        width: 220px;
+        border-right: 1px solid #ddd;
+        height: 100%;
+      }
+      .rgt
+      {
+        flex: 1;
+        margin-top: 0;
+
+        overflow: auto;
+        padding: 50px;
+        box-sizing: border-box
+      }
+      .lft div
+      {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+        display: block;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      .visHid
+      {
+        visibility: hidden !important;
+        height: 0px !important;
+        width: 0px !important;
+        overflow: hidden !important;
+        margin: 0px !important;
+      }
+      </style>
+  </head>
+  <body>
+
+
+    <main>
+      <div class="header">Embed Funcional Component</div>
+      <div class="container">
+          <div class="lft">
+            <div onclick="viewChange('react')">Desk App </div>
+            <div onclick="viewChange('ticList')">Ticket List </div>
+            <div onclick="viewChange('ticDet')">Ticket Detail </div>
+          </div>
+          <div class="rgt">
+
+              <div id="react" class="visHid"></div>
+              <div id='ticList' class="visHid"></div>
+              <div id="ticDet" class="visHid"></div>
+              <div id="hq" class="visHid"></div>
+              <div id="contactsbyticket" class="visHid"></div>
+
+          </div>
+      </div>
+    </main>
+
+
+
+
+    <script>
+    var staticDomain = {
+  js: '/',
+  css: '/',
+  images: '/',
+  fonts: '/'
+};
+
+var devURLParam = 'https://localhost:9090/';
+</script>
+    <script>
+    function ZOHODESK(ZD) {
+  ZD.setConfig({
+    clientId: '1000.DTSGFR00VEAN59566GK2ICOGM57MNH',
+    redirectUri:
+      'https://mahesh-zt151.tsi.zohocorpin.com:9090/api/auth/redirect',
+    container: document.querySelector('#react'),
+    organizationName: 'maheshefc',
+    style: `
+          desk{
+            background:#fff;
+            height:700px;
+          }
+          #react
+          {
+          },
+
+          `
+  });
+}
+
+(() => {
+  let i18n = {
+    'ar_SA.js': 'ar_SA.f3d89539f31a85cdd5fa.js',
+    'da_DK.js': 'da_DK.e7f846fc1b831644191a.js',
+    'de_DE.js': 'de_DE.f27782f8354516cc8970.js',
+    'en_GB.js': 'en_GB.15cc900d92fac74fa1d6.js',
+    'en_US.js': 'en_US.04940946fb4b4b61f9f6.js',
+    'es_ES.js': 'es_ES.3a38e0769fb01f882fc4.js',
+    'es_MX.js': 'es_MX.4a7b29063c958673b3e5.js',
+    'fr_FR.js': 'fr_FR.750f7cac67e3f03e12b6.js',
+    'it_IT.js': 'it_IT.b84d1aabb4cbcadbed8c.js',
+    'ja_JP.js': 'ja_JP.1b28595c7de7d1aa1550.js',
+    'nl_NL.js': 'nl_NL.ecd8752a4914ff8c72d7.js',
+    'pl_PL.js': 'pl_PL.83b1f642cda8e0ba9fb2.js',
+    'pt_BR.js': 'pt_BR.fa34baacbe8df75fcd0f.js',
+    'pt_PT.js': 'pt_PT.1086f6d1f24d54045fba.js',
+    'ru_RU.js': 'ru_RU.53c2614a6973bd4acc43.js',
+    'sv_SE.js': 'sv_SE.37201b5b23012ddff222.js',
+    'tr_TR.js': 'tr_TR.2304fa7342828fde6c73.js',
+    'vi_VN.js': 'vi_VN.105217c3e87d964bf4eb.js',
+    'zh_CN.js': 'zh_CN.52b2716a7b6ddf470fa5.js'
+  };
+  let langEle = document.querySelector('[data-efc-locale]');
+  let lang = langEle
+    ? langEle.getAttribute('data-efc-locale') + '.js'
+    : 'en_US.js';
+  let prod = false;
+  let assetURL = prod
+    ? 'https://localjs.zohostatic.com/support/build/zohostatic'
+    : 'https://mahesh-zt151.tsi.zohocorpin.com:9090';
+  window.staticDomain = {
+    //hook
+    js: assetURL + '/'
+  };
+  let css = prod ? 'css/efc.13d68824495da763b06e.css' : 'css/efc.css';
+  let js = prod
+    ? [
+        'i18n/' + i18n[lang],
+        'js/runtime~efc.59cce15908d2781cb855.js',
+        'js/vendor.0e0bdaed94b89278bd7c.js',
+        'js/react.vendor.b490666683d8c92b929b.js',
+        'js/efc.13d68824495da763b06e.js'
+      ]
+    : ['i18n/en_us.js', 'js/vendor.js', 'js/react.vendor.js', 'js/efc.js'];
+  let loadAsset = (id, type, url) => {
+    return new Promise((res, rej) => {
+      el = document.createElement(type);
+      el.id = id;
+      el.onload = res;
+      el.error = rej;
+      if (type == 'script') {
+        el.src = assetURL + '/' + url;
+        el.defer = 'defer';
+
+        document.body.appendChild(el);
+      } else if (type == 'link') {
+        el.href = assetURL + '/' + url;
+        el.rel = 'stylesheet';
+        document.head.appendChild(el);
+      }
+    });
+  };
+  ZOHODESK.onload = (cb, err) =>
+    Promise.all([
+      loadAsset('zd-css-1', 'link', css),
+      ...js.map((url, index) => loadAsset('zd-js-' + index, 'script', url))
+    ]).then(() => ZOHODESK.onBasicLoad(cb));
+})();
+</script>
+    <script>
+  ZOHODESK.onload(() => {
+  viewChange('react');
+  // try {
+  //   let deptId = ZOHODESK.get(
+  //     'departmentMapper.' + ZOHODESK.get('routing.paramMap.deptName')
+  //   );
+  //   ZOHODESK.renderContainer(
+  //     'TicketDetailview',
+  //     {
+  //       id: '402000042622145'
+  //     },
+  //     document.getElementById('ticDet')
+  //   );
+
+  //   ZOHODESK.renderContainer('HQDashboard', {}, document.getElementById('hq'));
+
+  //   ZOHODESK.renderContainer(
+  //     'ListItems',
+  //     {
+  //       deptId: "402000006623095",
+  //       module: 'tickets',
+  //       queries: [
+  //         {
+  //           condition: 'is',
+  //           fieldName: 'Email',
+  //           value: ['yuvaraj_baskaran+3@yahoo.com']
+  //         }
+  //       ]
+  //     },
+  //     document.getElementById('ticList')
+  //   );
+  // } catch (e) {
+  //   console.log('error in ur html file....', e);
+  // }
+});
+</script>
+  </body>
+</html>
