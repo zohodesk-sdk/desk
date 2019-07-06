@@ -1,0 +1,389 @@
+.common-module__requestqueueicons {
+  background-image: url('//vimalesan.herokuapp.com/support/images/request_queue_icons.4c21f0ba8888924fd720.png');
+  background-repeat: no-repeat;
+}
+.common-module__contactsprite {
+  background-image: url('//vimalesan.herokuapp.com/support/images/contact-sprite.2292d1c386ee2fca28f4.png');
+  background-repeat: no-repeat;
+}
+.common-module__integration {
+  background-image: url('//vimalesan.herokuapp.com/support/images/integsprite.1ccccda61c0f7d7bc704.png');
+  background-repeat: no-repeat;
+}
+.common-module__addformsprite {
+  background-image: url('//vimalesan.herokuapp.com/support/fonts/addformSprite.3ecd90c765aece166ef2.svg');
+  background-repeat: no-repeat;
+}
+.common-module__blueprintpattern {
+  background-image: url('//vimalesan.herokuapp.com/support/fonts/blueprint_pattern.51f7a3b9b4ec795baf71.svg');
+}
+.common-module__blueprinthistory {
+  background-image: url('//vimalesan.herokuapp.com/support/images/blueprint_history.60ad48e85bb4a249be42.png');
+}
+.common-module__blueprintstencils {
+  background-image: url('//vimalesan.herokuapp.com/support/images/blueprint_Stencil.051f2c243f4617403044.png');
+}
+.common-module__icons {
+  background-image: url('//vimalesan.herokuapp.com/support/images/icons.c278edada583726b6c93.gif');
+  background-repeat: no-repeat;
+}
+.common-module__jira {
+  background-image: url('//vimalesan.herokuapp.com/support/fonts/jiraSprite.2bf602e7658c2304ed24.svg');
+  background-repeat: no-repeat;
+}
+.FieldUpdate-module__container {
+  max-width: var(--zd_size960);
+}
+.FieldUpdate-module__field {
+  width: var(--zd_size350);
+}
+.FieldUpdate-module__arrow {
+  background-position: -623px 0;
+  width: var(--zd_size9);
+  height: var(--zd_size8);
+  margin: 0 var(--zd_size10);
+}
+.FieldUpdate-module__addPopup {
+  text-align: right;
+}
+.FieldUpdate-module__time {
+  width: var(--zd_size32);
+  margin-left: var(--zd_size20);
+  display: inline-block;
+}
+.FieldUpdate-module__check {
+  margin: var(--zd_size6) 0 0;
+}
+.FieldUpdate-module__label {
+  font-size: var(--zd_size13);
+}
+.FieldUpdate-module__textarea {
+  margin-top: var(--zd_size7);
+}
+html[dir='rtl'] .FieldUpdate-module__time {
+  margin-left: 0;
+  margin-right: var(--zd_size20);
+}
+.Select-module__input {
+  cursor: pointer;
+}
+.Select-module__small {
+  max-height: var(--zd_size200);
+}
+.Select-module__medium {
+  max-height: var(--zd_size350);
+}
+.Select-module__large {
+  max-height: var(--zd_size400);
+}
+.Select-module__emptyState {
+  font-size: var(--zd_size14);
+  color: var(--zd_text_smoke20);
+}
+.Select-module__box_small .Select-module__emptyState {
+  padding: var(--zd_size12) var(--zd_size6);
+}
+.Select-module__box_medium .Select-module__emptyState {
+  padding: var(--zd_size12) var(--zd_size15);
+}
+.Select-module__container {
+  position: relative;
+}
+.Select-module__arrowIcon {
+  height: var(--zd_size8);
+  line-height: var(--zd_size8);
+}
+.Select-module__box {
+  padding-top: var(--zd_size3);
+}
+.Select-module__small.Select-module__search {
+  padding: 0 var(--zd_size5);
+}
+.Select-module__medium.Select-module__search {
+  padding: 0 var(--zd_size15);
+}
+.CheckBox-module__container {
+  position: relative;
+}
+.CheckBox-module__basic {
+  display: inline-block;
+  line-height: 0;
+}
+.CheckBox-module__basic::after {
+  right: calc(var(--zd_size4) * -1);
+  top: calc(var(--zd_size1) * -1);
+}
+.CheckBox-module__layout::after {
+  top: calc(var(--zd_size1) * -1);
+}
+.CheckBox-module__input,
+.CheckBox-module__label span {
+  display: none;
+}
+.CheckBox-module__pointer {
+  cursor: pointer;
+}
+.CheckBox-module__label {
+  height: var(--zd_size15);
+  width: var(--zd_size15);
+  background-color: var(--zd_bg_pure);
+  border: 1px solid var(--zd_border_smoke18);
+  position: relative;
+  border-radius: 2px;
+  transform: perspective(1px);
+}
+.CheckBox-module__label,
+.CheckBox-module__container label + span > label {
+  transition: border-color ease 0.125s;
+  cursor: inherit;
+}
+.CheckBox-module__label,
+.CheckBox-module__label::after {
+  display: inline-block;
+}
+.CheckBox-module__label::after {
+  content: ' ';
+  z-index: 2;
+  color: inherit;
+  position: absolute;
+  left: var(--zd_size3);
+  top: var(--zd_size5);
+  width: var(--zd_size6);
+  transform: scaleX(-1) rotate(135deg) perspective(1px);
+  transform-origin: left top;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: none;
+}
+.CheckBox-module__checked + .CheckBox-module__label,
+.CheckBox-module__container:hover .CheckBox-module__label {
+  border-color: currentColor;
+}
+.CheckBox-module__checked + .CheckBox-module__label::after {
+  display: block;
+  animation: CheckBox-module__tick 0.3s ease 0s forwards;
+}
+.CheckBox-module__label span:before,
+.CheckBox-module__label span:after {
+  content: '';
+  position: absolute;
+  background: transparent;
+  z-index: 1;
+  display: inline-block;
+  transition: background 0.125s ease;
+}
+.CheckBox-module__label span:before {
+  right: calc(var(--zd_size1) * -1);
+  width: var(--zd_size2);
+  top: calc(var(--zd_size1) * -1);
+  height: var(--zd_size8);
+}
+.CheckBox-module__label span:after {
+  top: calc(var(--zd_size1) * -1);
+  right: 0;
+  width: var(--zd_size2);
+  height: var(--zd_size2);
+}
+.CheckBox-module__checked + .CheckBox-module__label span {
+  display: block;
+}
+.CheckBox-module__checked + .CheckBox-module__label span:before,
+.CheckBox-module__checked + .CheckBox-module__label span:after {
+  background-color: var(--zd_bg_pure);
+}
+.CheckBox-module__checked + .CheckBox-module__primary_active + span > label,
+.CheckBox-module__label_primary,
+.CheckBox-module__container:hover
+  .CheckBox-module__input:not([disabled])
+  + .CheckBox-module__primary_active
+  + span
+  > label {
+  color: var(--zd_text_primary);
+}
+.CheckBox-module__checked + .CheckBox-module__danger_active + span > label,
+.CheckBox-module__label_danger,
+.CheckBox-module__container:hover
+  .CheckBox-module__input:not([disabled])
+  + .CheckBox-module__danger_active
+  + span
+  > label {
+  color: var(--zd_text_danger);
+}
+.CheckBox-module__label + span {
+  margin-left: var(--zd_size6);
+}
+@keyframes CheckBox-module__tick {
+  0% {
+    height: 0;
+    width: 0;
+  }
+  50% {
+    height: 0;
+    width: var(--zd_size6);
+  }
+  100% {
+    height: var(--zd_size15);
+  }
+}
+html[dir='rtl'] .CheckBox-module__label + span {
+  margin-left: auto;
+  margin-right: var(--zd_size6);
+}
+.DateTime-module__container {
+  border-radius: 3px;
+  background-color: var(--zd_bg_pure);
+  color: var(--zd_text_dark6);
+  padding: var(--zd_size10);
+  font-size: var(--zd_size16);
+}
+.DateTime-module__header {
+  min-height: var(--zd_size30);
+  text-align: center;
+}
+.DateTime-module__thArrowConatainer {
+  width: 14.4%;
+}
+.DateTime-module__thArrow,
+.DateTime-module__datesStr {
+  color: var(--zd_text_dark5);
+  font-size: var(--zd_size14);
+  vertical-align: middle;
+  cursor: pointer;
+  padding: var(--zd_size4) 0;
+  width: var(--zd_size27);
+  display: inline-block;
+}
+.DateTime-module__thArrow:hover,
+.DateTime-module__datesStr:hover {
+  color: var(--zd_text_primary);
+  background: var(--zd_bg_smoke1);
+  border-radius: 50%;
+}
+.DateTime-module__thMonYear {
+  font-size: var(--zd_size14);
+  line-height: var(--zd_size21);
+  color: var(--zd_text_dark4);
+}
+.DateTime-module__dateContainer {
+  padding-bottom: var(--zd_size10);
+  border-bottom: solid 1px var(--zd_border_smoke1);
+}
+.DateTime-module__days {
+  min-height: var(--zd_size25);
+  text-align: center;
+}
+.DateTime-module__daysStr {
+  font-size: var(--zd_size12);
+  font-family: var(--zd_light);
+  color: var(--zd_text_dark4);
+  text-transform: uppercase;
+}
+.DateTime-module__dateRow {
+  height: var(--zd_size28);
+  text-align: center;
+}
+.DateTime-module__sunday {
+  color: var(--zd_text_mandatory);
+}
+.DateTime-module__today,
+.DateTime-module__today:hover {
+  background-color: var(--zd_bg_primary);
+  color: var(--zd_text_pure);
+  border-radius: 50%;
+}
+.DateTime-module__emptySpan {
+  display: inline-block;
+}
+.DateTime-module__timesection {
+  border-bottom: solid 1px var(--zd_border_smoke1);
+  padding-bottom: var(--zd_size10);
+  margin-top: var(--zd_size10);
+}
+.DateTime-module__timeStr {
+  font-size: var(--zd_size14);
+  color: var(--zd_text_dark6);
+  margin-right: var(--zd_size5);
+}
+.DateTime-module__dropDownContainer {
+  padding: 0 var(--zd_size5);
+}
+.DateTime-module__dropDown {
+  width: var(--zd_size60);
+  display: inline-block;
+  margin: 0 var(--zd_size4);
+  position: relative;
+}
+.DateTime-module__footer {
+  margin-top: var(--zd_size10);
+}
+.DateTime-module__space {
+  display: inline-block;
+  width: var(--zd_size15);
+}
+html[dir='rtl'] .DateTime-module__timeStr {
+  margin-right: initial;
+  margin-left: var(--zd_size5);
+}
+.DateWidget-module__container {
+  position: relative;
+}
+.DateWidget-module__readOnly,
+.DateWidget-module__readOnly > input {
+  cursor: no-drop;
+}
+.DateWidget-module__disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.DateWidget-module__enabled {
+  cursor: pointer;
+}
+.DateWidget-module__textBox {
+  position: relative;
+}
+.DateWidget-module__inputLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--zd_border_smoke33);
+  transition: border 0.2s linear 0s;
+}
+.DateWidget-module__enabled:hover .DateWidget-module__inputLine {
+  border-bottom: 1px solid var(--zd_border_dark5);
+}
+.DateWidget-module__textBoxFocus .DateWidget-module__inputLine {
+  border-bottom: 1px solid var(--zd_border_primary);
+}
+.NewFieldUpdatesPage-module__inputContent {
+  max-width: var(--zd_size360);
+  padding: var(--zd_size23) 0;
+}
+.NewFieldUpdatesPage-module__inputContent1 {
+  padding: var(--zd_size17) 0;
+  max-width: var(--zd_size360);
+}
+.NewFieldUpdatesPage-module__inputContent2 {
+  padding: var(--zd_size20) 0;
+}
+.NewFieldUpdatesPage-module__tags {
+  margin: var(--zd_size30) var(--zd_size10) var(--zd_size30) 0;
+  display: inline-block;
+}
+.NewFieldUpdatesPage-module__check {
+  margin-bottom: var(--zd_size20);
+}
+.NewFieldUpdatesPage-module__text {
+  margin-bottom: var(--zd_size20);
+  max-width: var(--zd_size700);
+}
+.NewFieldUpdatesPage-module__message {
+  margin-top: var(--zd_size10);
+}
+.NewFieldUpdatesPage-module__role {
+  width: var(--zd_size280);
+  display: inline-block;
+  margin-right: var(--zd_size30);
+}

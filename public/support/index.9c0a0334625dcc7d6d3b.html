@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html {{--html--attr}}>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#1f2734"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+	    .deskParent *{margin:0; padding:0; box-sizing:border-box}
+	    body{margin:0}
+	    .dflex {
+	      display: -webkit-box;
+	      display: -ms-flexbox;
+	      display: flex;
+	    }
+	    .dflex{height:100%;width:100%}
+	    .flexgrow {
+	      -webkit-box-flex: 1;
+	      -ms-flex-positive: 1;
+	      flex-grow: 1;
+	      min-height: 0;
+	      min-width: 0;
+	    }
+	    .flexshrink {
+	      flex-shrink: 0;
+	      -moz-flex-shrink: 0;
+	      -webkit-flex-shrink: 0;
+	      -ms-flex-shrink: 0;
+	    }
+	    .flexbasis {
+	      flex-basis: 0%;
+	      -webkit-flex-basis: 0%;
+	      -moz-flex-basis: 0%;
+	      -ms-flex-basis: 0%;
+	    }
+	    .alignVertical {
+	      -webkit-box-align: center;
+	      -ms-flex-align: center;
+	      align-items: center;
+	    }
+	    .alignHorizontal {
+	      -webkit-box-pack: center;
+	      -ms-flex-pack: center;
+	      justify-content: center;
+	    }
+	    .flexrow {
+	      -webkit-box-orient: horizontal;
+	      -webkit-box-direction: normal;
+	      -webkit-flex-direction: row;
+	      -ms-flex-direction: row;
+	      flex-direction: row;
+	    }
+	    .flexcolumn {
+	      -webkit-box-orient: vertical;
+	      -webkit-box-direction: normal;
+	      -webkit-flex-direction: column;
+	      -ms-flex-direction: column;
+	      flex-direction: column;
+	    }
+
+	    .deskParent{
+	      height:100vh;width:100%
+	    }
+	    .header{
+	      background:#1f2734;
+	      height:45px
+	    }
+	    .stencil {
+
+	      background-color: #a2a2a2;
+	    animation:  placeHolderShimmer 1s cubic-bezier(1,0,0,1) infinite;
+	      -webkit-animation:  placeHolderShimmer 1s cubic-bezier(1,0,0,1) infinite
+	        -moz-animation:  placeHolderShimmer 1s cubic-bezier(1,0,0,1) infinite
+
+	    }
+	    @keyframes placeHolderShimmer {
+	      from {
+	        opacity: .4
+	    }
+	    50% {
+	        opacity: .6
+	    }
+	    to {
+	        opacity: 1
+	    }
+	    }
+
+	    .rectangular {
+	      height: 10px;
+	    width: 120px;
+	    display: inline-block;
+	    border-radius: 3px;
+	    margin-right: 15px;
+	    }
+	    .circle{
+	      height: 20px;
+	    width: 20px;
+	    display: inline-block;
+	    border-radius: 50%;
+	    margin:0 15px;
+	    }
+	    .left{padding-left:20px}
+	    .loader{text-align:center; position:relative}
+	    .ball{padding-top: 130px;
+	    width: 20px;
+	    float: left;
+	    position: relative;}
+	    .ball:after {
+	    content: '';
+	    position: absolute;
+	    bottom: 0;
+	    left: 0;
+	    width: 20px;
+	    height: 20px;
+	    float: left;
+	    border-radius: 50%;
+	}
+	.bar{    clear: left;
+	    padding-top: 20px;
+	    margin-left: -2px;
+	    float: left;}
+	    .bar div{    float: left;
+	    margin-left: 2px;
+	    width: 18px;
+	    height: 1px;
+	    border-radius: 50%;
+	    box-shadow: 0 0 3px rgba(204,204,204,0.3);
+	    background: rgba(204,204,204,0.3);filter: blur(2px);
+	  }
+	.ball:first-child:after, .bar>div:nth-child(1)
+	{
+	  background: rgba(245,94,79,1);
+	background: -moz-linear-gradient(left,rgba(245,94,79,1) 31%,rgba(120,199,127,1) 100%);
+	background: -webkit-gradient(left top,right top,color-stop(31%,rgba(245,94,79,1)),color-stop(100%,rgba(120,199,127,1)));
+	background: -webkit-linear-gradient(left,rgba(245,94,79,1) 31%,rgba(120,199,127,1) 100%);
+	background: -o-linear-gradient(left,rgba(245,94,79,1) 31%,rgba(120,199,127,1) 100%);
+	background: -ms-linear-gradient(left,rgba(245,94,79,1) 31%,rgba(120,199,127,1) 100%);
+	background: linear-gradient(to right,rgba(245,94,79,1) 31%,rgba(120,199,127,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6',endColorstr='#00aade',GradientType=1);
+	}
+	.ball:nth-child(2):after, .bar>div:nth-child(2){
+	  background: rgba(120,199,127,1);
+	    background: -moz-linear-gradient(left,rgba(120,199,127,1) 62%,rgba(0,170,222,1) 100%);
+	    background: -webkit-gradient(left top,right top,color-stop(62%,rgba(120,199,127,1)),color-stop(100%,rgba(0,170,222,1)));
+	    background: -webkit-linear-gradient(left,rgba(120,199,127,1) 62%,rgba(0,170,222,1) 100%);
+	    background: -o-linear-gradient(left,rgba(120,199,127,1) 62%,rgba(0,170,222,1) 100%);
+	    background: -ms-linear-gradient(left,rgba(120,199,127,1) 62%,rgba(0,170,222,1) 100%);
+	    background: linear-gradient(to right,rgba(120,199,127,1) 62%,rgba(0,170,222,1) 100%);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6',endColorstr='#00aade',GradientType=1);
+	}
+	.ball:nth-child(3):after, .bar>div:nth-child(3) {
+	    background: rgba(27,184,198,1);
+	    background: -moz-linear-gradient(left,rgba(27,184,198,1) 0,rgba(0,170,222,1) 100%);
+	    background: -webkit-gradient(left top,right top,color-stop(0,rgba(27,184,198,1)),color-stop(100%,rgba(0,170,222,1)));
+	    background: -webkit-linear-gradient(left,rgba(27,184,198,1) 0,rgba(0,170,222,1) 100%);
+	    background: -o-linear-gradient(left,rgba(27,184,198,1) 0,rgba(0,170,222,1) 100%);
+	    background: -ms-linear-gradient(left,rgba(27,184,198,1) 0,rgba(0,170,222,1) 100%);
+	    background: linear-gradient(to right,rgba(27,184,198,1) 0,rgba(0,170,222,1) 100%);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6',endColorstr='#00aade',GradientType=1);
+	}
+	.ball:nth-child(4):after, .bar>div:nth-child(4) {
+	    background: rgba(0,170,222,1);
+	    background: -moz-linear-gradient(left,rgba(0,170,222,1) 0,rgba(255,226,6,1) 100%);
+	    background: -webkit-gradient(left top,right top,color-stop(0,rgba(0,170,222,1)),color-stop(100%,rgba(255,226,6,1)));
+	    background: -webkit-linear-gradient(left,rgba(0,170,222,1) 0,rgba(255,226,6,1) 100%);
+	    background: -o-linear-gradient(left,rgba(0,170,222,1) 0,rgba(255,226,6,1) 100%);
+	    background: -ms-linear-gradient(left,rgba(0,170,222,1) 0,rgba(255,226,6,1) 100%);
+	    background: linear-gradient(to right,rgba(0,170,222,1) 0,rgba(255,226,6,1) 100%);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00aade',endColorstr='#ffe206',GradientType=1);
+	}
+	.ball:nth-child(5):after, .bar>div:nth-child(5) {
+	    background: rgba(159,235,188,1);
+	    background: -moz-linear-gradient(left,rgba(159,235,188,1) 0,rgba(159,235,188,1) 0,rgba(235,213,50,1) 35%,rgba(255,226,6,1) 100%);
+	    background: -webkit-gradient(left top,right top,color-stop(0,rgba(159,235,188,1)),color-stop(0,rgba(159,235,188,1)),color-stop(35%,rgba(235,213,50,1)),color-stop(100%,rgba(255,226,6,1)));
+	    background: -webkit-linear-gradient(left,rgba(159,235,188,1) 0,rgba(159,235,188,1) 0,rgba(235,213,50,1) 35%,rgba(255,226,6,1) 100%);
+	    background: -o-linear-gradient(left,rgba(159,235,188,1) 0,rgba(159,235,188,1) 0,rgba(235,213,50,1) 35%,rgba(255,226,6,1) 100%);
+	    background: -ms-linear-gradient(left,rgba(159,235,188,1) 0,rgba(159,235,188,1) 0,rgba(235,213,50,1) 35%,rgba(255,226,6,1) 100%);
+	    background: linear-gradient(to right,rgba(159,235,188,1) 0,rgba(159,235,188,1) 0,rgba(235,213,50,1) 35%,rgba(255,226,6,1) 100%);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9febbc',endColorstr='#ffe206',GradientType=1);
+	}
+	.firstball {
+	    animation: cradle_left .375s ease-in-out 0s infinite alternate;
+	}
+	.lastball {
+	    animation: cradle_right .375s ease-in-out 0s infinite alternate;
+	}
+	.first {
+	    animation: reflect_left .375s ease-in-out 0s infinite alternate;
+	}
+	.last {
+	    animation: reflect_right .375s ease-in-out 0s infinite alternate;
+	}
+
+	@keyframes cradle_left{0%{transform:rotate(0) translateY(0)}50%{transform:rotate(0) translateY(0)}100%{transform:rotate(50deg) translateY(-20px)}}
+	@keyframes cradle_right{0%{transform:rotate(-50deg) translateY(-20px)}50%{transform:rotate(0) translateY(0)}100%{transform:rotate(0) translateY(0)}}
+	@keyframes reflect_left{0%{transform:translateX(0)}50%{transform:translateX(0)}100%{transform:translateX(-25px)}}
+	@keyframes reflect_right{0%{transform:translateX(25px)}50%{transform:translateY(0)}100%{transform:translateY(0)}}
+	  </style>
+    {{--favicon}}
+  <link href="//vimalesan.herokuapp.com/support/css/main.6417265d44a2bfef49e1.css" rel="stylesheet"></head>
+  <body>
+    <div id="react">
+	 <div class="deskParent dflex flexcolumn">
+
+	  <div class="header flexshrink ">
+	    <div class="dflex cover flexrow">
+	        <div class="left flexgrow flexshrink flexbasis">
+	          <div class="dflex cover flexrow alignVertical">
+	          <span class="stencil rectangular"></span>
+	          <span class="stencil rectangular"></span>
+	          <span class="stencil rectangular"></span>
+	          <span class="stencil rectangular"></span>
+	          <span class="stencil rectangular"></span>
+	          <span class="stencil rectangular"></span>
+	        </div>
+	        </div>
+	        <div class="right">
+	          <div class="dflex cover flexrow alignVertical">
+	            <span class="stencil circle"></span>
+	            <span class="stencil circle"></span>
+	            <span class="stencil circle"></span>
+	            <span class="stencil circle"></span>
+	            <span class="stencil circle"></span>
+	          </div>
+	        </div>
+	      </div>
+	</div>
+	<div class="footer flexgrow flexshrink flexbasis">
+	  <div class="dflex cover flexrow alignVertical alignHorizontal">
+	    <div class="loader">
+	      <div class="ball firstball"></div>
+	      <div class="ball"></div>
+	      <div class="ball"></div>
+	      <div class="ball"></div>
+	      <div class="ball lastball"></div>
+	      <div class="bar">
+	        <div class="first"></div>
+	        <div></div>
+	        <div></div>
+	        <div></div>
+	        <div class="last"></div>
+	        </div>
+	      </div>
+
+	  </div>
+
+	</div>
+
+	</div>
+</div>
+    {{--initial--data}}
+  <script src="//vimalesan.herokuapp.com/support/js/./runtime~main.24736eb094dfe89fd01f.js"></script><script src="//vimalesan.herokuapp.com/support/js/vendor.62108ab894378cf81615.js"></script><script src="//vimalesan.herokuapp.com/support/js/react.vendor.ce8706efde3809773bdf.js"></script><script src="//vimalesan.herokuapp.com/support/js/main.6417265d44a2bfef49e1.js"></script></body>
+</html>
+<!--DON'T BREAK LINE-->
+<!--I18nInfoToServer{"en_US":"//js.zohostatic.com/support/build/zohostatic/i18n/en_US.aa8559f9fc90abb5f19f.js","da_DK":"//js.zohostatic.com/support/build/zohostatic/i18n/da_DK.d6f130c6bc4343d3aa10.js","de_DE":"//js.zohostatic.com/support/build/zohostatic/i18n/de_DE.af41a3e9980a506132cc.js","ar_SA":"//js.zohostatic.com/support/build/zohostatic/i18n/ar_SA.aa73061487c761a81bc9.js","es_MX":"//js.zohostatic.com/support/build/zohostatic/i18n/es_MX.069195da81273f661403.js","en_GB":"//js.zohostatic.com/support/build/zohostatic/i18n/en_GB.b6df20a2e7059b3993dd.js","es_ES":"//js.zohostatic.com/support/build/zohostatic/i18n/es_ES.dbf166aafb501b6cd257.js","it_IT":"//js.zohostatic.com/support/build/zohostatic/i18n/it_IT.4c80b6947cbb37cc3743.js","nl_NL":"//js.zohostatic.com/support/build/zohostatic/i18n/nl_NL.64665de682ce8a37ceb4.js","fr_FR":"//js.zohostatic.com/support/build/zohostatic/i18n/fr_FR.839f3d044486b4d73847.js","ja_JP":"//js.zohostatic.com/support/build/zohostatic/i18n/ja_JP.0d8e1cfe3b91b75880d3.js","pl_PL":"//js.zohostatic.com/support/build/zohostatic/i18n/pl_PL.33d3b3db1d5bac209987.js","pt_BR":"//js.zohostatic.com/support/build/zohostatic/i18n/pt_BR.cfe3caca72a5329f2d4d.js","pt_PT":"//js.zohostatic.com/support/build/zohostatic/i18n/pt_PT.fc77c4f09498eba751c9.js","sv_SE":"//js.zohostatic.com/support/build/zohostatic/i18n/sv_SE.8a258334863203123566.js","tr_TR":"//js.zohostatic.com/support/build/zohostatic/i18n/tr_TR.350e63c15f44f7016a74.js","ru_RU":"//js.zohostatic.com/support/build/zohostatic/i18n/ru_RU.4c7ba997a55f25ca2f75.js","zh_CN":"//js.zohostatic.com/support/build/zohostatic/i18n/zh_CN.19cf7f16ddb9793bef93.js","vi_VN":"//js.zohostatic.com/support/build/zohostatic/i18n/vi_VN.46742733cf989b39f9dd.js"}I18nInfoToServer-->
