@@ -60,6 +60,9 @@
       }
     });
   };
+  if (window.ZOHODESK) {
+    window.ZOHODESK = () => {};
+  }
   window.ZOHODESK.onload = (cb, err) =>
     Promise.all([
       loadAsset('zd-css-1', 'link', css),
