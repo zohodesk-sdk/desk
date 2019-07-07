@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/zohodesk-sdk/desk.git"
   },
-  "keywords": ["desk", "sdk", "examples"],
+  "keywords": [
+    "desk",
+    "sdk",
+    "examples"
+  ],
   "author": "vimalesan.ceg@gmail.com",
   "license": "ISC",
   "bugs": {
@@ -19,6 +23,7 @@
   },
   "homepage": "https://github.com/zohodesk-sdk/desk#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.15.2"
   }
 }

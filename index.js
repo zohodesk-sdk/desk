@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
+const compression = require('compression')
 
 express()
-  .use(
+  .use(compression()).use(
     express.static(path.join(__dirname, 'public'), {
       setHeaders(res) {
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
+        res.setHeader('Cache-Control', 'public,max-age=3600,immutable');
       }
     })
   )
