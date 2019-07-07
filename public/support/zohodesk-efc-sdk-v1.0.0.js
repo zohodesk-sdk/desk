@@ -60,7 +60,7 @@
       }
     });
   };
-  if (window.ZOHODESK) {
+  if (!window.ZOHODESK) {
     window.ZOHODESK = () => {};
   }
   window.ZOHODESK.onload = (cb, err) =>
