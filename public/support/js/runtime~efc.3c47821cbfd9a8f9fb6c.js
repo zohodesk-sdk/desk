@@ -758,7 +758,7 @@
                     150: 'bdd35f91c42be423d6d9'
                   }[e] +
                   '.css',
-                f = '//vimalesan.herokuapp.com/support' + c,
+                f = '//vimalesan.herokuapp.com/support/' + c,
                 d = document.getElementsByTagName('link'),
                 n = 0;
               n < d.length;
@@ -1461,7 +1461,7 @@
                         150: 'bdd35f91c42be423d6d9'
                       }[e] +
                       '.css',
-                    f = '//vimalesan.herokuapp.com/support' + c,
+                    f = '//vimalesan.herokuapp.com/support/' + c,
                     d = document.getElementsByTagName('link'),
                     n = 0;
                   n < d.length;
