@@ -4,7 +4,7 @@
 		let langEle = document.querySelector("[data-efc-locale]"); let lang = langEle ?  langEle.getAttribute('data-efc-locale')+'.js': 'en_US.js'
 		let prod = true;
 		let assetURL = prod
-		  ? "https://js.zohostatic.com/support/build/zohostatic"
+		  ? "https://vimalesan.herokuapp.com/support"
 		  : "https://mahesh-zt151.csez.zohocorpin.com:9090"
 		window.staticDomain = {
 		  //hook
