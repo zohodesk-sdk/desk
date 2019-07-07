@@ -60,12 +60,9 @@
       }
     });
   };
-  if (!window.ZOHODESK) {
-    window.ZOHODESK = () => {};
-  }
-  window.ZOHODESK.onload = (cb, err) =>
+  ZOHODESK.onload = (cb, err) =>
     Promise.all([
       loadAsset('zd-css-1', 'link', css),
       ...js.map((url, index) => loadAsset('zd-js-' + index, 'script', url))
-    ]).then(() => window.ZOHODESK.onBasicLoad(cb));
+    ]).then(() => ZOHODESK.onBasicLoad(cb));
 })();
