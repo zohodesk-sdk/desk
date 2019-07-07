@@ -9,9 +9,9 @@ function ZOHODESK(ZD) {
             background:#fff;
             height:700px;
           }
-          #react
-          {
-          },
+          desk a:link, desk a:focus, desk a:hover, desk a:active, desk a:visited {
+    color: white;
+},
 
           `
   });
