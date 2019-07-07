@@ -64,5 +64,5 @@
     Promise.all([
       loadAsset('zd-css-1', 'link', css),
       ...js.map((url, index) => loadAsset('zd-js-' + index, 'script', url))
-    ]).then(() => ZOHODESK.onBasicLoad(cb));
+    ]).then(() => window.ZOHODESK.onBasicLoad(cb));
 })();
