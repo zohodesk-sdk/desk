@@ -6,6 +6,7 @@ express()
   .use(
     express.static(path.join(__dirname, 'public'), {
       setHeaders(res) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
       }
     })
