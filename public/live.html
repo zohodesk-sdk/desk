@@ -219,12 +219,67 @@ var devURLParam = 'https://localhost:9090/';
           `
   });
 }
-</script>
-
-<script src='https://localjs.zohostatic.com/support/build/zohostatic/zohodesk-efc-sdk-v1.0.0.js' ></script>
 
 
-    <script>
+
+(() => {
+
+  let i18n ={"ar_SA.js":"ar_SA.dccc52d2b4e0950233ca.js","da_DK.js":"da_DK.406c2a6d174ae0c918c1.js","de_DE.js":"de_DE.c0d68e461531b1da56d5.js","en_GB.js":"en_GB.d09bf29d2af364a7c233.js","en_US.js":"en_US.8737e3125e30cc52542d.js","es_ES.js":"es_ES.213095431843319f225b.js","es_MX.js":"es_MX.1ae154dfec8007824f41.js","fr_FR.js":"fr_FR.20e47e68c8d6c74c2051.js","it_IT.js":"it_IT.763384f4613303fb998e.js","ja_JP.js":"ja_JP.64d6732ad849ae6da300.js","nl_NL.js":"nl_NL.15ef22e343e75036dc04.js","pl_PL.js":"pl_PL.7a9604c5cbbba49eaebc.js","pt_BR.js":"pt_BR.07a887aa183c8b3ca413.js","pt_PT.js":"pt_PT.3982d30f76807ca3c4b5.js","ru_RU.js":"ru_RU.7879d2f3406eee2c37be.js","sv_SE.js":"sv_SE.e5e1a5a57d40f98b6942.js","tr_TR.js":"tr_TR.5043983a306080adddcf.js","vi_VN.js":"vi_VN.4d5c265c2d2ae8248a05.js","zh_CN.js":"zh_CN.9e632085975e0d00a76e.js"} ;
+  let langEle = document.querySelector("[data-efc-locale]"); let lang = langEle ?  langEle.getAttribute('data-efc-locale')+'.js': 'en_US.js'
+  let prod = false;
+  let assetURL = prod
+    ? "https://localjs.zohostatic.com/support/build/zohostatic"
+    : "https://indra-zt322.tsi.zohocorpin.com:9090"
+  window.staticDomain = {
+    //hook
+    js: assetURL + '/'
+  };
+  let css = prod ? 'css/efc.37c8ccdab607dbae25c5.css' : 'css/efc.css';
+  let js = prod
+    ? [
+      'i18n/'+i18n[lang],
+      'js/runtime~efc.5d438216e3b25e9621e4.js',
+      'js/vendor.6ef87526bb39566e6098.js',
+      'js/react.vendor.b07329e28bd660c6f1f6.js',
+      'js/efc.37c8ccdab607dbae25c5.js'
+    ]
+    : [
+      'i18n/en_us.js',
+      'js/vendor.js',
+      'js/react.vendor.js',
+      'js/efc.js'
+    ];
+  let loadAsset = (id, type, url) => {
+    return new Promise((res, rej) => {
+    el = document.createElement(type);
+    el.id = id;
+    el.onload = res;
+    el.error = rej;
+    if (type == 'script') {
+      el.src = assetURL+'/'+url
+      el.defer = 'defer';
+
+      document.body.appendChild(el);
+    } else if (type == 'link') {
+      el.href =  assetURL+'/'+url
+      el.rel = 'stylesheet';
+      document.head.appendChild(el);
+    }
+    });
+  };
+  ZOHODESK.onload = (cb, err) =>
+    Promise.all([
+    loadAsset('zd-css-1', 'link', css),
+    ...js.map((url, index) => loadAsset("zd-js-"+index, 'script', url))
+    ]).then(()=>ZOHODESK.onBasicLoad(cb));
+  })();
+
+ 
+
+
+
+
+   
   ZOHODESK.onload(() => {
   try {
     let deptId = ZOHODESK.get(
