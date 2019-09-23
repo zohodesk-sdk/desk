@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html {{--html--attr}}>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#1f2734" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    .print .deskParent {
+      display: none
+    }
+
+    .deskParent * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0
+    }
+
+    .dflex {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .dflex {
+      height: 100%;
+      width: 100%
+    }
+
+    .flexgrow {
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .flexshrink {
+      flex-shrink: 0;
+      -moz-flex-shrink: 0;
+      -webkit-flex-shrink: 0;
+      -ms-flex-shrink: 0;
+    }
+
+    .flexbasis {
+      flex-basis: 0%;
+      -webkit-flex-basis: 0%;
+      -moz-flex-basis: 0%;
+      -ms-flex-basis: 0%;
+    }
+
+    .alignVertical {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .alignHorizontal {
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    .flexrow {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row;
+    }
+
+    .flexcolumn {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .deskParent {
+      height: 100vh;
+      width: 100%
+    }
+
+    .header {
+      background: #1f2734;
+      height: 45px
+    }
+
+    .stencil {
+
+      background-color: #a2a2a2;
+      animation: placeHolderShimmer 1s cubic-bezier(1, 0, 0, 1) infinite;
+      -webkit-animation: placeHolderShimmer 1s cubic-bezier(1, 0, 0, 1) infinite -moz-animation: placeHolderShimmer 1s cubic-bezier(1, 0, 0, 1) infinite
+    }
+
+    @keyframes placeHolderShimmer {
+      from {
+        opacity: .4
+      }
+
+      50% {
+        opacity: .6
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .rectangular {
+      height: 10px;
+      width: 120px;
+      display: inline-block;
+      border-radius: 3px;
+      margin-right: 15px;
+    }
+
+    .circle {
+      height: 20px;
+      width: 20px;
+      display: inline-block;
+      border-radius: 50%;
+      margin: 0 15px;
+    }
+
+    .left {
+      padding-left: 20px
+    }
+
+    .loader {
+      text-align: center;
+      position: relative
+    }
+
+    .ball {
+      padding-top: 130px;
+      width: 20px;
+      float: left;
+      position: relative;
+    }
+
+    .ball:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      float: left;
+      border-radius: 50%;
+    }
+
+    .bar {
+      clear: left;
+      padding-top: 20px;
+      margin-left: -2px;
+      float: left;
+    }
+
+    .bar div {
+      float: left;
+      margin-left: 2px;
+      width: 18px;
+      height: 1px;
+      border-radius: 50%;
+      box-shadow: 0 0 3px rgba(204, 204, 204, 0.3);
+      background: rgba(204, 204, 204, 0.3);
+      filter: blur(2px);
+    }
+
+    .ball:first-child:after,
+    .bar>div:nth-child(1) {
+      background: rgba(245, 94, 79, 1);
+      background: -moz-linear-gradient(left, rgba(245, 94, 79, 1) 31%, rgba(120, 199, 127, 1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(31%, rgba(245, 94, 79, 1)), color-stop(100%, rgba(120, 199, 127, 1)));
+      background: -webkit-linear-gradient(left, rgba(245, 94, 79, 1) 31%, rgba(120, 199, 127, 1) 100%);
+      background: -o-linear-gradient(left, rgba(245, 94, 79, 1) 31%, rgba(120, 199, 127, 1) 100%);
+      background: -ms-linear-gradient(left, rgba(245, 94, 79, 1) 31%, rgba(120, 199, 127, 1) 100%);
+      background: linear-gradient(to right, rgba(245, 94, 79, 1) 31%, rgba(120, 199, 127, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6', endColorstr='#00aade', GradientType=1);
+    }
+
+    .ball:nth-child(2):after,
+    .bar>div:nth-child(2) {
+      background: rgba(120, 199, 127, 1);
+      background: -moz-linear-gradient(left, rgba(120, 199, 127, 1) 62%, rgba(0, 170, 222, 1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(62%, rgba(120, 199, 127, 1)), color-stop(100%, rgba(0, 170, 222, 1)));
+      background: -webkit-linear-gradient(left, rgba(120, 199, 127, 1) 62%, rgba(0, 170, 222, 1) 100%);
+      background: -o-linear-gradient(left, rgba(120, 199, 127, 1) 62%, rgba(0, 170, 222, 1) 100%);
+      background: -ms-linear-gradient(left, rgba(120, 199, 127, 1) 62%, rgba(0, 170, 222, 1) 100%);
+      background: linear-gradient(to right, rgba(120, 199, 127, 1) 62%, rgba(0, 170, 222, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6', endColorstr='#00aade', GradientType=1);
+    }
+
+    .ball:nth-child(3):after,
+    .bar>div:nth-child(3) {
+      background: rgba(27, 184, 198, 1);
+      background: -moz-linear-gradient(left, rgba(27, 184, 198, 1) 0, rgba(0, 170, 222, 1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0, rgba(27, 184, 198, 1)), color-stop(100%, rgba(0, 170, 222, 1)));
+      background: -webkit-linear-gradient(left, rgba(27, 184, 198, 1) 0, rgba(0, 170, 222, 1) 100%);
+      background: -o-linear-gradient(left, rgba(27, 184, 198, 1) 0, rgba(0, 170, 222, 1) 100%);
+      background: -ms-linear-gradient(left, rgba(27, 184, 198, 1) 0, rgba(0, 170, 222, 1) 100%);
+      background: linear-gradient(to right, rgba(27, 184, 198, 1) 0, rgba(0, 170, 222, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bb8c6', endColorstr='#00aade', GradientType=1);
+    }
+
+    .ball:nth-child(4):after,
+    .bar>div:nth-child(4) {
+      background: rgba(0, 170, 222, 1);
+      background: -moz-linear-gradient(left, rgba(0, 170, 222, 1) 0, rgba(255, 226, 6, 1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0, rgba(0, 170, 222, 1)), color-stop(100%, rgba(255, 226, 6, 1)));
+      background: -webkit-linear-gradient(left, rgba(0, 170, 222, 1) 0, rgba(255, 226, 6, 1) 100%);
+      background: -o-linear-gradient(left, rgba(0, 170, 222, 1) 0, rgba(255, 226, 6, 1) 100%);
+      background: -ms-linear-gradient(left, rgba(0, 170, 222, 1) 0, rgba(255, 226, 6, 1) 100%);
+      background: linear-gradient(to right, rgba(0, 170, 222, 1) 0, rgba(255, 226, 6, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00aade', endColorstr='#ffe206', GradientType=1);
+    }
+
+    .ball:nth-child(5):after,
+    .bar>div:nth-child(5) {
+      background: rgba(159, 235, 188, 1);
+      background: -moz-linear-gradient(left, rgba(159, 235, 188, 1) 0, rgba(159, 235, 188, 1) 0, rgba(235, 213, 50, 1) 35%, rgba(255, 226, 6, 1) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0, rgba(159, 235, 188, 1)), color-stop(0, rgba(159, 235, 188, 1)), color-stop(35%, rgba(235, 213, 50, 1)), color-stop(100%, rgba(255, 226, 6, 1)));
+      background: -webkit-linear-gradient(left, rgba(159, 235, 188, 1) 0, rgba(159, 235, 188, 1) 0, rgba(235, 213, 50, 1) 35%, rgba(255, 226, 6, 1) 100%);
+      background: -o-linear-gradient(left, rgba(159, 235, 188, 1) 0, rgba(159, 235, 188, 1) 0, rgba(235, 213, 50, 1) 35%, rgba(255, 226, 6, 1) 100%);
+      background: -ms-linear-gradient(left, rgba(159, 235, 188, 1) 0, rgba(159, 235, 188, 1) 0, rgba(235, 213, 50, 1) 35%, rgba(255, 226, 6, 1) 100%);
+      background: linear-gradient(to right, rgba(159, 235, 188, 1) 0, rgba(159, 235, 188, 1) 0, rgba(235, 213, 50, 1) 35%, rgba(255, 226, 6, 1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9febbc', endColorstr='#ffe206', GradientType=1);
+    }
+
+    .firstball {
+      animation: cradle_left .375s ease-in-out 0s infinite alternate;
+    }
+
+    .lastball {
+      animation: cradle_right .375s ease-in-out 0s infinite alternate;
+    }
+
+    .first {
+      animation: reflect_left .375s ease-in-out 0s infinite alternate;
+    }
+
+    .last {
+      animation: reflect_right .375s ease-in-out 0s infinite alternate;
+    }
+
+    @keyframes cradle_left {
+      0% {
+        transform: rotate(0) translateY(0)
+      }
+
+      50% {
+        transform: rotate(0) translateY(0)
+      }
+
+      100% {
+        transform: rotate(50deg) translateY(-20px)
+      }
+    }
+
+    @keyframes cradle_right {
+      0% {
+        transform: rotate(-50deg) translateY(-20px)
+      }
+
+      50% {
+        transform: rotate(0) translateY(0)
+      }
+
+      100% {
+        transform: rotate(0) translateY(0)
+      }
+    }
+
+    @keyframes reflect_left {
+      0% {
+        transform: translateX(0)
+      }
+
+      50% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-25px)
+      }
+    }
+
+    @keyframes reflect_right {
+      0% {
+        transform: translateX(25px)
+      }
+
+      50% {
+        transform: translateY(0)
+      }
+
+      100% {
+        transform: translateY(0)
+      }
+    }
+  </style>
+  {{--favicon}}
+<link href="//vimalesan.herokuapp.com/hsdk/./css/styles.d053a621390c0c81fd6a.css" rel="stylesheet"></head>
+
+<body>
+  <div id="react">
+    <div class="deskParent dflex flexcolumn">
+
+      <div class="header flexshrink ">
+        <div class="dflex cover flexrow">
+          <div class="left flexgrow flexshrink flexbasis">
+            <div class="dflex cover flexrow alignVertical">
+              <span class="stencil rectangular"></span>
+              <span class="stencil rectangular"></span>
+              <span class="stencil rectangular"></span>
+              <span class="stencil rectangular"></span>
+              <span class="stencil rectangular"></span>
+              <span class="stencil rectangular"></span>
+            </div>
+          </div>
+          <div class="right">
+            <div class="dflex cover flexrow alignVertical">
+              <span class="stencil circle"></span>
+              <span class="stencil circle"></span>
+              <span class="stencil circle"></span>
+              <span class="stencil circle"></span>
+              <span class="stencil circle"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer flexgrow flexshrink flexbasis">
+        <div class="dflex cover flexrow alignVertical alignHorizontal">
+          <div class="loader">
+            <div class="ball firstball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball lastball"></div>
+            <div class="bar">
+              <div class="first"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="last"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  {{--initial--data}}
+  <script>
+    if ( 'serviceWorker' in navigator ) {
+      let swUrl = '/agent/_sw-v1.js';
+      navigator.serviceWorker.register( swUrl ).then( serviceWorker => {
+        console.log( 'service worker registration successful' );
+        serviceWorker.addEventListener( 'updatefound', ( event ) => {
+          console.log( 'New Service Worker Found' );
+        } )
+      } ).catch( err => {
+        console.error( 'service worker registration failed' )
+      } );
+    } else {
+      console.log( 'service worker unavailable' );
+    }
+  </script>
+<script src="//vimalesan.herokuapp.com/hsdk/./js/./runtime~main.836ba5f5eb34a7507aff.js"></script><script src="//vimalesan.herokuapp.com/hsdk/./js/vendor.69c28e4a823c45aa20d8.js"></script><script src="//vimalesan.herokuapp.com/hsdk/./js/react.vendor.65207b7758868d42da81.js"></script><script src="//vimalesan.herokuapp.com/hsdk/./js/styles.d053a621390c0c81fd6a.js"></script><script src="//vimalesan.herokuapp.com/hsdk/./js/main.ca228fcd3f6ab3fc988d.js"></script></body>
+
+</html>
+<!-- DON'T BREAK LINE -->
+<!--I18nInfoToServer{"ar_SA":"//vimalesan.herokuapp.com/hsdk/ar_SA.0e3064768228a2e9cdb8.js","en_GB":"//vimalesan.herokuapp.com/hsdk/en_GB.1e9faa27f938153f1580.js","de_DE":"//vimalesan.herokuapp.com/hsdk/de_DE.2eba38e558b7ec7a9fab.js","da_DK":"//vimalesan.herokuapp.com/hsdk/da_DK.8e08912411ba9fa11fdd.js","en_US":"//vimalesan.herokuapp.com/hsdk/en_US.52f9ba4f52d32a7bd0bf.js","es_ES":"//vimalesan.herokuapp.com/hsdk/es_ES.67746facd6bbf373471d.js","fr_FR":"//vimalesan.herokuapp.com/hsdk/fr_FR.504d77dfb7780796e15f.js","es_MX":"//vimalesan.herokuapp.com/hsdk/es_MX.7f8e3501f757768be6b1.js","it_IT":"//vimalesan.herokuapp.com/hsdk/it_IT.0e1141dfdaef184bee43.js","ja_JP":"//vimalesan.herokuapp.com/hsdk/ja_JP.7ab30db0935c35623534.js","nl_NL":"//vimalesan.herokuapp.com/hsdk/nl_NL.ada26305d78a4451a4b8.js","pl_PL":"//vimalesan.herokuapp.com/hsdk/pl_PL.421aa66d50d0907ece74.js","pt_BR":"//vimalesan.herokuapp.com/hsdk/pt_BR.cc86e9d0029e12e9d91b.js","pt_PT":"//vimalesan.herokuapp.com/hsdk/pt_PT.ac8b70a1e9deb1d3d68c.js","tr_TR":"//vimalesan.herokuapp.com/hsdk/tr_TR.12c230ad473634839738.js","sv_SE":"//vimalesan.herokuapp.com/hsdk/sv_SE.0198dcade1b652f0e2af.js","vi_VN":"//vimalesan.herokuapp.com/hsdk/vi_VN.fa63ea536ec2cf5a5c62.js","zh_CN":"//vimalesan.herokuapp.com/hsdk/zh_CN.b1a2299f012397713aa9.js","ru_RU":"//vimalesan.herokuapp.com/hsdk/ru_RU.627e4ff6b42a74efe2fe.js"}I18nInfoToServer-->
