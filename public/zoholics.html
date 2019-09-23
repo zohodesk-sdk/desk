@@ -25,25 +25,27 @@
             selectHTML += `<option value=${id}>${id} - ${ticIds[id].ticketNumber} - ${ticIds[id].subject} </option>`;
           });
           selectHTML += `</select>`;
-
-          console.log(selectHTML, "selectHTML");
           document.getElementById("option").innerHTML = selectHTML;
 
           onchangeTicketdet(Object.keys(ticIds)[0]);
-        }
-
-        if (value == "ticList") {
+        } else if (value == "ticList") {
           let ticIds = ZOHODESK.get(`module.ticket`) || {};
-          let selectHTML = `<select id='ticdetselect' onchange="onchangeTickets()">`;
-          Object.keys(ticIds).forEach(id => {
-            selectHTML += `<option value=${id}>${id} - ${ticIds[id].ticketNumber} - ${ticIds[id].subject} </option>`;
-          });
-          selectHTML += `</select>`;
-
-          console.log(selectHTML, "selectHTML");
-          document.getElementById("option").innerHTML = selectHTML;
-
+          // let selectHTML = `<select id='ticdetselect' onchange="onchangeTickets()">`;
+          // Object.keys(ticIds).forEach(id => {
+          //   selectHTML += `<option value=${id}>${id} - ${ticIds[id].ticketNumber} - ${ticIds[id].subject} </option>`;
+          // });
+          // selectHTML += `</select>`;
+          // document.getElementById("option").innerHTML = selectHTML;
           onchangeTickets(Object.keys(ticIds)[0]);
+        } else if (value == "hq") {
+          let deptId = ZOHODESK.get(
+            "departmentMapper." + ZOHODESK.get("routing.paramMap.deptName")
+          );
+          ZOHODESK.renderContainer(
+            "HQDashboard",
+            {},
+            document.getElementById("hq")
+          );
         }
       }
 
@@ -150,12 +152,13 @@
   </head>
   <body>
     <main>
-      <div class="header">Embed Funcional Component</div>
+      <div class="header">Embeddable Funcional Component</div>
       <div class="container">
         <div class="lft">
           <div onclick="viewChange('react')">Desk App</div>
+          <div onclick="viewChange('hq')">Headquarter</div>
           <div onclick="viewChange('ticList')">Ticket List</div>
-          <div onclick="viewChange('ticDet')">Ticket Detail</div>
+          <!-- <div onclick="viewChange('ticDet')">Ticket Detail</div> -->
         </div>
         <div class="rgt">
           <div>Chrome Extension</div>
