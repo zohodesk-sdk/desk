@@ -38,9 +38,11 @@
       border-bottom: 1px solid #fff;
     }
     .compRender {
-      height: calc(100vh - 40px);
-      padding: 10px;
+      height: calc(100vh - 70px);
+      border: 1px solid #eee;
+      padding: 40px;
       background: #fff;
+      margin: 20px;
     }
     #DeskApp,
     #TicketListView {
@@ -203,6 +205,9 @@
             document.getElementById("DeskApp")
           );
         }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById("DeskApp"));
+        }
         render() {
           return <div id="DeskApp"> </div>;
         }
@@ -220,6 +225,9 @@
         }
         render() {
           return <div id="TicketListView"> </div>;
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById("TicketListView"));
         }
       }
       class TicketDetail extends React.Component {
@@ -242,8 +250,11 @@
           ZOHODESK.renderContainer(
             "TicketDetailview",
             { id: id },
-            document.getElementById("DeskApp")
+            document.getElementById("ticketdetail")
           );
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById("ticketdetail"));
         }
         change(e) {
           this.setState({ id: e.target.value }, this.renderDetails);
@@ -261,7 +272,7 @@
                     })}
                 </select>
               </div>
-              <div id="DeskApp"> </div>
+              <div id="ticketdetail"> </div>
             </div>
           );
         }
@@ -289,6 +300,9 @@
             { deptName: "" },
             document.getElementById("HQ")
           );
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById("HQ"));
         }
         change(e) {
           this.setState({ id: e.target.value }, this.renderHQ);
