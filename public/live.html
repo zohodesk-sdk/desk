@@ -1,221 +1,339 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f5fffc;
+    }
+    .main {
+      height: 100vh;
+      width: 100vw;
+    }
+    .header {
+      padding: 10px;
+      background: black;
+      color: #ffffff;
+    }
+    .header::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .tabs {
+      float: right;
+      padding-right: 20px;
+    }
+    .tabs span {
+      font-size: 13px;
+      color: #fff;
+      margin: 0px 10px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    .sel {
+      border-bottom: 1px solid #fff;
+    }
+    .compRender {
+      height: calc(100vh - 40px);
+      padding: 10px;
+      background: #fff;
+    }
+    #DeskApp,
+    #TicketListView {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .loader {
+      width: 150px;
+      height: 150px;
+      line-height: 150px;
+      margin: 100px auto;
+      position: relative;
+      box-sizing: border-box;
+      text-align: center;
+      z-index: 0;
+      text-transform: uppercase;
+    }
+
+    .loader:before,
+    .loader:after {
+      opacity: 0;
+      box-sizing: border-box;
+      content: "\0020";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 100px;
+      border: 5px solid #1cc748;
+      box-shadow: 0 0 50px #fff, inset 0 0 50px #a0f585;
+    }
+
+    .loader:after {
+      z-index: 1;
+      -webkit-animation: gogoloader 2s infinite 1s;
+    }
+
+    .loader:before {
+      z-index: 2;
+      -webkit-animation: gogoloader 2s infinite;
+    }
+
+    @-webkit-keyframes gogoloader {
+      0% {
+        -webkit-transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
   <head>
-    <!-- <link rel="manifest" href="/manifest.webmanifest" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link
-      rel="preload"
-      href="/fonts/zdfonts.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin="anonymous"
-    ></link> -->
-    <script type="text/javascript">
-      function viewChange(value) {
-        document.getElementById("react").classList.add("visHid");
-        document.getElementById("ticList").classList.add("visHid");
-        document.getElementById("ticDet").classList.add("visHid");
-
-        document.getElementById(value).classList.remove("visHid");
-
-        if (value == "ticDet") {
-          let ticIds = ZOHODESK.get(`module.ticket`) || {};
-          let selectHTML = `<select id='ticdetselect' onchange="onchangeTicketdet()">`;
-          Object.keys(ticIds).forEach(id => {
-            selectHTML += `<option value=${id}>${id} - ${ticIds[id].ticketNumber} - ${ticIds[id].subject} </option>`;
-          });
-          selectHTML += `</select>`;
-
-          console.log(selectHTML, "selectHTML");
-          document.getElementById("option").innerHTML = selectHTML;
-
-          onchangeTicketdet(Object.keys(ticIds)[0]);
-        }
-
-        if (value == "ticList") {
-          let ticIds = ZOHODESK.get(`module.ticket`) || {};
-          let selectHTML = `<select id='ticdetselect' onchange="onchangeTickets()">`;
-          Object.keys(ticIds).forEach(id => {
-            selectHTML += `<option value=${id}>${id} - ${ticIds[id].ticketNumber} - ${ticIds[id].subject} </option>`;
-          });
-          selectHTML += `</select>`;
-
-          console.log(selectHTML, "selectHTML");
-          document.getElementById("option").innerHTML = selectHTML;
-
-          onchangeTickets(Object.keys(ticIds)[0]);
-        }
-      }
-
-      function onchangeTickets(depId) {
-        ZOHODESK.renderContainer(
-          "ListItems",
-          {
-            deptId: "402000006623095",
-            module: "tickets",
-            queries: [
-              {
-                condition: "is",
-                fieldName: "Email",
-                value: ["aravind25111@gmail.com"]
-              }
-            ]
-          },
-          document.getElementById("ticList")
-        );
-      }
-
-      function onchangeTicketdet(ticId) {
-        let id = ticId ? ticId : document.getElementById("ticdetselect").value;
-        ZOHODESK.renderContainer(
-          "TicketDetailview",
-          {
-            id: id
-          },
-          document.getElementById("ticDet")
-        );
-      }
-    </script>
-    <style>
-      select {
-        padding: 8px 10px;
-        border: 1px solid #ddd;
-        outline: none;
-        border-radius: none;
-        background: #fff;
-        font-size: 15px;
-      }
-      #contacts,
-      #hq,
-      #ticList,
-      #ticDet {
-        width: 90%;
-        height: 800px;
-        padding: 10px;
-        border: 1px solid #000;
-        margin: 20px auto;
-      }
-
-      #react {
-        margin: 50px 10px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        min-height: 500px;
-      }
-      main {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-      }
-      .header {
-        padding: 10px;
-        background: #000;
-        color: #fff;
-      }
-      .container {
-        flex: 1;
-        display: flex;
-      }
-      .lft {
-        width: 220px;
-        border-right: 1px solid #ddd;
-        height: 100%;
-      }
-      .rgt {
-        flex: 1;
-        margin-top: 0;
-
-        overflow: auto;
-        padding: 50px;
-        box-sizing: border-box;
-      }
-      .lft div {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-        border-top: 1px solid #ddd;
-        display: block;
-        margin-bottom: 20px;
-        cursor: pointer;
-      }
-      .visHid {
-        visibility: hidden !important;
-        height: 0px !important;
-        width: 0px !important;
-        overflow: hidden !important;
-        margin: 0px !important;
-        min-height: 0px !important;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <div class="header">Embed Funcional Component</div>
-      <div class="container">
-        <div class="lft">
-          <div onclick="viewChange('react')">Desk App</div>
-          <div onclick="viewChange('ticList')">Ticket List</div>
-          <div onclick="viewChange('ticDet')">Ticket Detail</div>
-        </div>
-        <div class="rgt">
-          <div>Chrome Extension</div>
-          <a href="/zohodesk-injector.crx">Download</a>
-          <div id="option"></div>
-          <div id="react" class="visHid"></div>
-          <div id="ticList" class="visHid"></div>
-          <div id="ticDet" class="visHid"></div>
-          <div id="hq" class="visHid"></div>
-          <div id="contactsbyticket" class="visHid"></div>
-        </div>
-      </div>
-    </main>
-
+    <meta charset="UTF-8" />
+    <title>EFC</title>
     <script>
-      viewChange("react");
-
-      var staticDomain = {
-        js: "/",
-        css: "/",
-        images: "/",
-        fonts: "/"
-      };
-
-      var devURLParam = "https://localhost:9090/";
-    </script>
-    <script>
+      localStorage.clear();
       function ZOHODESK(ZD) {
         ZD.setConfig({
           clientId: "1000.XG43B4FQ2QNW105754310WC9ZX5S9H",
           redirectUri: "https://vimalesan.herokuapp.com/redirect.html",
           container: document.querySelector("#react"),
           organizationName: "maheshefc",
-          style: `
-          desk{
-            background:#fff;
-            height:700px;
-          }
-          #react
-          {
-          },
-
-          `
+          style: ""
         });
       }
     </script>
+    <script src="https://vimalesan.herokuapp.com/hsdk/zohodesk-efc-sdk-v1.0.0-beta.1.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-    <script src="https://localjs.zohostatic.com/support/build/zohostatic/zohodesk-efc-sdk-v1.0.0-beta.0.js"></script>
+    <script type="text/babel">
+      class EFCApp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { menu: "app", loading: true };
+          this.onChangeTab = this.onChangeTab.bind(this);
+          this.loadingToggle = this.loadingToggle.bind(this);
+        }
+        onChangeTab(menu) {
+          this.setState({ menu: menu });
+        }
+        loadingToggle() {
+          this.setState({ loading: false });
+        }
+        render() {
+          let { menu } = this.state;
+          console.log(window.loading, "window.loading ");
+          return (
+            <main className="main">
+              <header className="header">
+                Embed Funcional Component
+                <div className="tabs">
+                  <span
+                    onClick={this.onChangeTab.bind(this, "app")}
+                    className={menu == "app" ? "sel" : ""}
+                  >
+                    Desk-App
+                  </span>
+                  <span
+                    onClick={this.onChangeTab.bind(this, "ticketlist")}
+                    className={menu == "ticketlist" ? "sel" : ""}
+                  >
+                    Ticket-List
+                  </span>
+                  {/*<span
+                    onClick={this.onChangeTab.bind(this, "ticketdetail")}
+                    className={menu == "ticketdetail" ? "sel" : ""}
+                  >
+                    Ticket-Detail
+                  </span>*/}
+                  <span
+                    onClick={this.onChangeTab.bind(this, "HQ")}
+                    className={menu == "HQ" ? "sel" : ""}
+                  >
+                    HQ
+                  </span>
+                </div>
+              </header>
+              {this.state.loading ? (
+                <div className="loader">Loading</div>
+              ) : (
+                <div className="compRender">
+                  {menu == "app" ? (
+                    <DeskApp />
+                  ) : menu == "ticketlist" ? (
+                    <TicketList />
+                  ) : menu == "ticketdetail" ? (
+                    <TicketDetail />
+                  ) : menu == "HQ" ? (
+                    <HQ />
+                  ) : null}
+                </div>
+              )}
+            </main>
+          );
+        }
+      }
+
+      class DeskApp extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        componentDidMount() {
+          ZOHODESK.renderContainer(
+            "DeskApp",
+            {},
+            document.getElementById("DeskApp")
+          );
+        }
+        render() {
+          return <div id="DeskApp"> </div>;
+        }
+      }
+      class TicketList extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        componentDidMount() {
+          ZOHODESK.renderContainer(
+            "TicketListView",
+            {},
+            document.getElementById("TicketListView")
+          );
+        }
+        render() {
+          return <div id="TicketListView"> </div>;
+        }
+      }
+      class TicketDetail extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { id: null, ticListIds: {} };
+          this.renderDetails = this.renderDetails.bind(this);
+          this.change = this.change.bind(this);
+        }
+        componentDidMount() {
+          let ids = ZOHODESK.get(`module.ticket`) || {};
+          this.setState(
+            { ticListIds: ids || {}, id: ids[0] && null },
+            this.renderDetails
+          );
+        }
+
+        renderDetails() {
+          let { id } = this.state;
+          ZOHODESK.renderContainer(
+            "TicketDetailview",
+            { id: id },
+            document.getElementById("DeskApp")
+          );
+        }
+        change(e) {
+          this.setState({ id: e.target.value }, this.renderDetails);
+        }
+
+        render() {
+          let { ticListIds, id } = this.state;
+          return (
+            <div>
+              <div>
+                <select value={id} onChange={this.change}>
+                  {ticListIds &&
+                    Object.keys(ticListIds).map(id => {
+                      return <option value={id}>{id}</option>;
+                    })}
+                </select>
+              </div>
+              <div id="DeskApp"> </div>
+            </div>
+          );
+        }
+      }
+
+      class HQ extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { id: null, deptIds: {} };
+          this.renderHQ = this.renderHQ.bind(this);
+          this.change = this.change.bind(this);
+        }
+        componentDidMount() {
+          let deptIdsObj = ZOHODESK.get(`departmentMapper`) || {};
+          this.setState(
+            { deptIds: deptIdsObj, id: deptIdsObj[0] || null },
+            this.renderHQ
+          );
+        }
+        renderHQ() {
+          let { id } = this.state;
+          ZOHODESK.removeContainer(document.getElementById("HQ"));
+          ZOHODESK.renderContainer(
+            "HQDashboard",
+            { deptName: "" },
+            document.getElementById("HQ")
+          );
+        }
+        change(e) {
+          this.setState({ id: e.target.value }, this.renderHQ);
+        }
+        render() {
+          let { deptIds, id } = this.state;
+          return (
+            <div>
+              <div>
+                <select value={id} onChange={this.change}>
+                  {deptIds &&
+                    Object.keys(deptIds).map(value => {
+                      return <option value={value}>{value}</option>;
+                    })}
+                </select>
+              </div>
+              <div id="HQ"> </div>
+            </div>
+          );
+        }
+      }
+
+      var efcinstance = ReactDOM.render(
+        <EFCApp />,
+        document.getElementById("root")
+      );
+      //const efcinstance = new EFCApp();
+    </script>
 
     <script>
       ZOHODESK.onload(() => {
-        /*  try {
-    let deptId = ZOHODESK.get(
-      'departmentMapper.' + ZOHODESK.get('routing.paramMap.deptName')
-    );
+        try {
+          let deptId = ZOHODESK.get(
+            "departmentMapper." + ZOHODESK.get("routing.paramMap.deptName")
+          );
 
-    ZOHODESK.renderContainer('HQDashboard', {}, document.getElementById('hq'));
-  } catch (e) {
-    console.log('error in ur html file....', e);
-  }*/
+          console.log(
+            "ZOHODESK",
+            ZOHODESK,
+            ZOHODESK.get && ZOHODESK.renderContainer
+          );
+
+          console.log(efcinstance, efcinstance.loadingToggle());
+        } catch (e) {
+          console.log("error in ur html file....", e);
+        }
       });
     </script>
   </body>

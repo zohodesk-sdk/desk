@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.83 14.84">
+  <defs>
+    <style>.cls-1,.cls-2{fill:#2f94ee;}.cls-1{opacity:0.15;}.cls-2{opacity:0.08;}</style>
+  </defs>
+  <title>bp11</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M0,0V14.84H1V1H14.83V0Z"/>
+      <path class="cls-2" d="M2.92,3.92v2H1v1H2.92v2H1v1H2.92v2H1v1H2.92v1.92h1V12.92h2v1.92h1V12.92h2v1.92h1V12.92h2v1.92h1V12.92h1.91v-1H12.92v-2h1.91v-1H12.92v-2h1.91v-1H12.92v-2h1.91v-1H12.92V1h-1V2.92h-2V1h-1V2.92h-2V1h-1V2.92h-2V1h-1V2.92H1v1Zm7,6h2v2h-2Zm0-3h2v2h-2Zm0-3h2v2h-2Zm-3,6h2v2h-2Zm0-3h2v2h-2Zm0-3h2v2h-2Zm-3,6h2v2h-2Zm0-3h2v2h-2Zm0-3h2v2h-2Z"/>
+    </g>
+  </g>
+</svg>

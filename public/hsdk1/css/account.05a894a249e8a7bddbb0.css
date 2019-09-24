@@ -1,0 +1,1 @@
+.zd-accountlist-alphabeticList{position:absolute;top:var(--zd_size60);right:var(--zd_size25);bottom:var(--zd_size60);padding:var(--zd_size10) 0}html[dir="rtl"] .zd-accountlist-alphabeticList{right:inherit;left:var(--zd_size25)}@media only screen and (max-width:61.25em){.zd-accountlist-alphabeticList{right:var(--zd_size15)}}
