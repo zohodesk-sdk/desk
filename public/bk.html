@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f5fffc;
+    }
+    .main {
+      height: 100vh;
+      width: 100vw;
+    }
+    .header {
+      padding: 10px;
+      background: black;
+      color: #ffffff;
+    }
+    .header::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .tabs {
+      float: right;
+      padding-right: 20px;
+    }
+    .tabs span {
+      font-size: 13px;
+      color: #fff;
+      margin: 0px 10px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    .sel {
+      border-bottom: 1px solid #fff;
+    }
+    .compRender {
+      height: calc(100vh - 70px);
+      border: 1px solid #eee;
+      padding: 40px;
+      background: #fff;
+      margin: 20px;
+    }
+    #DeskApp,
+    #TicketListView {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .loader {
+      width: 150px;
+      height: 150px;
+      line-height: 150px;
+      margin: 100px auto;
+      position: relative;
+      box-sizing: border-box;
+      text-align: center;
+      z-index: 0;
+      text-transform: uppercase;
+    }
+
+    .loader:before,
+    .loader:after {
+      opacity: 0;
+      box-sizing: border-box;
+      content: '\0020';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 100px;
+      border: 5px solid #1cc748;
+      box-shadow: 0 0 50px #fff, inset 0 0 50px #a0f585;
+    }
+
+    .loader:after {
+      z-index: 1;
+      -webkit-animation: gogoloader 2s infinite 1s;
+    }
+
+    .loader:before {
+      z-index: 2;
+      -webkit-animation: gogoloader 2s infinite;
+    }
+
+    @-webkit-keyframes gogoloader {
+      0% {
+        -webkit-transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <title>EFC</title>
+    <script>
+      localStorage.clear();
+      function ZOHODESK(ZD) {
+        ZD.setConfig({
+          clientId: '1000.MGU7OQJ2LXPJ915667NYI0PUJHAFSH',
+          redirectUri: 'https://vimalesan.herokuapp.com/redirect.html',
+          container: document.querySelector('#react'),
+          apiUrl: 'https://deskclientapp.localzoho.com',
+          env: 'localzoho',
+          organizationName: 'maheshefc',
+          style: ''
+        });
+      }
+    </script>
+    <script>
+      (() => {
+        let i18n = {
+          'af_ZA.js': 'af_ZA.9da1d2ac2b9187bb2a46.js',
+          'ar_EG.js': 'ar_EG.f5f83f21ef0c6bd50683.js',
+          'bg_BG.js': 'bg_BG.1e7594a285d683989a13.js',
+          'cs_CZ.js': 'cs_CZ.0986be2371c1351975fe.js',
+          'da_DK.js': 'da_DK.19d1a7ca636a432071dd.js',
+          'de_DE.js': 'de_DE.e371097b46ab8767c30f.js',
+          'el_GR.js': 'el_GR.f6780eba0bc776ae78fb.js',
+          'en_US.js': 'en_US.c86e90afacc45e8fd6e8.js',
+          'es_AR.js': 'es_AR.a991d9e340b01ca2ff24.js',
+          'es_ES.js': 'es_ES.4e858cbe88bc64407647.js',
+          'fa_IR.js': 'fa_IR.b962aa75bafa8c48ba01.js',
+          'fi_FI.js': 'fi_FI.cafa971d173daf0260d8.js',
+          'fr_CA.js': 'fr_CA.5a8b9a98dc2dc1a879a7.js',
+          'fr_FR.js': 'fr_FR.b96a7c5d4ce1d4792644.js',
+          'hi_IN.js': 'hi_IN.37be8b5fb887cf77d54e.js',
+          'hu_HU.js': 'hu_HU.f5b0c27bebafcdcf4ffb.js',
+          'id_ID.js': 'id_ID.c62d5a7726aa9b62fab3.js',
+          'it_IT.js': 'it_IT.28efdaecf28064eab76b.js',
+          'iw_IL.js': 'iw_IL.c5876c9bd9cd2845aa8a.js',
+          'ja_JP.js': 'ja_JP.42e9ebe1a162fbb1b2f1.js',
+          'kn_IN.js': 'kn_IN.3dcf52e7cda53c850a5b.js',
+          'ko_KR.js': 'ko_KR.735f1c982783514b6c78.js',
+          'mr_IN.js': 'mr_IN.a5792924ffb93d92a5ec.js',
+          'nb_NO.js': 'nb_NO.05666b48c19347adc1f6.js',
+          'nl_NL.js': 'nl_NL.fe40a4a8e5ca6e3c4b9b.js',
+          'pl_PL.js': 'pl_PL.92242f8051c5a3b546a9.js',
+          'pt_BR.js': 'pt_BR.60208c00e8919fd462ca.js',
+          'pt_PT.js': 'pt_PT.acba135bcb963c296639.js',
+          'ro_RO.js': 'ro_RO.0907304cce0bec51946b.js',
+          'ru_RU.js': 'ru_RU.da96b925ff889f61d664.js',
+          'sv_SE.js': 'sv_SE.f54fca80aca1ccca5c31.js',
+          'ta_IN.js': 'ta_IN.4a68b567b936211e9e9f.js',
+          'te_IN.js': 'te_IN.0e81db8a2eb3bd23d43b.js',
+          'th_TH.js': 'th_TH.f304883ebc4324e1ba5d.js',
+          'tr_TR.js': 'tr_TR.eaf33459b257f61d1190.js',
+          'uk_UA.js': 'uk_UA.c2c125faeedf04771fd9.js',
+          'ur_PK.js': 'ur_PK.9409ea7bdb1d87f97def.js',
+          'vi_VN.js': 'vi_VN.fe56fbfeac1af7372ebd.js',
+          'zh_CN.js': 'zh_CN.98e0f6a4e33e2b724e50.js',
+          'zh_TW.js': 'zh_TW.85f89e037b1ed1c86273.js'
+        };
+        let langEle = document.querySelector('[data-efc-locale]');
+        let lang = langEle
+          ? langEle.getAttribute('data-efc-locale') + '.js'
+          : 'en_US.js';
+        let prod = false;
+        let assetURL = prod
+          ? '//localjs.zohostatic.com/support/build/'
+          : 'https://bharathi-zt93.tsi.zohocorpin.com:9090';
+        window.staticDomain = {
+          //hook
+          js: assetURL + '/'
+        };
+        let css = prod
+          ? 'css/styles.a254be154a492c051391.css'
+          : 'css/styles.css';
+        let js = prod
+          ? [
+              'i18n/' + i18n[lang],
+              'js/runtime~efc.c53138ec77d6b88724f1.js',
+              'js/vendor.202bc345ae0533722cb1.js',
+              'js/react.vendor.7a577f023403b86c234b.js',
+              'js/styles.a254be154a492c051391.js',
+              'js/efc.770c9789a2a192ef302c.js'
+            ]
+          : [
+              'i18n/en_us.js',
+              'js/vendor.js',
+              'js/react.vendor.js',
+              'js/styles.js',
+              'js/efc.js'
+            ];
+        let loadAsset = (id, type, url) => {
+          return new Promise((res, rej) => {
+            el = document.createElement(type);
+            el.id = id;
+            el.onload = res;
+            el.error = rej;
+            if (type == 'script') {
+              el.src = assetURL + '/' + url;
+              el.defer = 'defer';
+
+              document.body.appendChild(el);
+            } else if (type == 'link') {
+              el.href = assetURL + '/' + url;
+              el.rel = 'stylesheet';
+              document.head.appendChild(el);
+            }
+          });
+        };
+        ZOHODESK.onload = (cb, err) =>
+          Promise.all([
+            loadAsset('zd-css-1', 'link', css),
+            ...js.map((url, index) =>
+              loadAsset('zd-js-' + index, 'script', url)
+            )
+          ]).then(() => ZOHODESK.onBasicLoad(cb));
+      })();
+    </script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class EFCApp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { menu: 'app', loading: true };
+          this.onChangeTab = this.onChangeTab.bind(this);
+          this.loadingToggle = this.loadingToggle.bind(this);
+        }
+        onChangeTab(menu) {
+          this.setState({ menu: menu });
+        }
+        loadingToggle() {
+          this.setState({ loading: false });
+        }
+        render() {
+          let { menu } = this.state;
+          console.log(window.loading, 'window.loading ');
+          return (
+            <main className='main'>
+              <header className='header'>
+                ZohoDesk Embeddable
+                <div className='tabs'>
+                  <span
+                    onClick={this.onChangeTab.bind(this, 'app')}
+                    className={menu == 'app' ? 'sel' : ''}
+                  >
+                    Desk-App
+                  </span>
+                  <span
+                    onClick={this.onChangeTab.bind(this, 'ticketlist')}
+                    className={menu == 'ticketlist' ? 'sel' : ''}
+                  >
+                    Ticket-List
+                  </span>
+                  {/*<span
+                    onClick={this.onChangeTab.bind(this, "ticketdetail")}
+                    className={menu == "ticketdetail" ? "sel" : ""}
+                  >
+                    Ticket-Detail
+                  </span>*/}
+                  <span
+                    onClick={this.onChangeTab.bind(this, 'HQ')}
+                    className={menu == 'HQ' ? 'sel' : ''}
+                  >
+                    HQ
+                  </span>
+                </div>
+              </header>
+              {this.state.loading ? (
+                <div className='loader'>Loading</div>
+              ) : (
+                <div className='compRender'>
+                  {menu == 'app' ? (
+                    <DeskApp />
+                  ) : menu == 'ticketlist' ? (
+                    <TicketList />
+                  ) : menu == 'ticketdetail' ? (
+                    <TicketDetail />
+                  ) : menu == 'HQ' ? (
+                    <HQ />
+                  ) : null}
+                </div>
+              )}
+            </main>
+          );
+        }
+      }
+
+      class DeskApp extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        componentDidMount() {
+          ZOHODESK.renderContainer(
+            'DeskApp',
+            {},
+            document.getElementById('DeskApp')
+          );
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById('DeskApp'));
+        }
+        render() {
+          return <div id='DeskApp'> </div>;
+        }
+      }
+      class TicketList extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        componentDidMount() {
+          ZOHODESK.renderContainer(
+            'TicketListView',
+            {},
+            document.getElementById('TicketListView')
+          );
+        }
+        render() {
+          return <div id='TicketListView'> </div>;
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById('TicketListView'));
+        }
+      }
+      class TicketDetail extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { id: null, ticListIds: {} };
+          this.renderDetails = this.renderDetails.bind(this);
+          this.change = this.change.bind(this);
+        }
+        componentDidMount() {
+          let ids = ZOHODESK.get(`module.ticket`) || {};
+          this.setState(
+            { ticListIds: ids || {}, id: ids[0] && null },
+            this.renderDetails
+          );
+        }
+
+        renderDetails() {
+          let { id } = this.state;
+          ZOHODESK.renderContainer(
+            'TicketDetailview',
+            { id: id },
+            document.getElementById('ticketdetail')
+          );
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById('ticketdetail'));
+        }
+        change(e) {
+          this.setState({ id: e.target.value }, this.renderDetails);
+        }
+
+        render() {
+          let { ticListIds, id } = this.state;
+          return (
+            <div>
+              <div>
+                <select value={id} onChange={this.change}>
+                  {ticListIds &&
+                    Object.keys(ticListIds).map(id => {
+                      return <option value={id}>{id}</option>;
+                    })}
+                </select>
+              </div>
+              <div id='ticketdetail'> </div>
+            </div>
+          );
+        }
+      }
+
+      class HQ extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { id: null, deptIds: {} };
+          this.renderHQ = this.renderHQ.bind(this);
+          this.change = this.change.bind(this);
+        }
+        componentDidMount() {
+          let deptIdsObj = ZOHODESK.get(`departmentMapper`) || {};
+          this.setState(
+            { deptIds: deptIdsObj, id: deptIdsObj[0] || null },
+            this.renderHQ
+          );
+        }
+        renderHQ() {
+          let { id } = this.state;
+          ZOHODESK.removeContainer(document.getElementById('HQ'));
+          ZOHODESK.renderContainer(
+            'HQDashboard',
+            { deptName: '' },
+            document.getElementById('HQ')
+          );
+        }
+        componentWillUnmount() {
+          ZOHODESK.removeContainer(document.getElementById('HQ'));
+        }
+        change(e) {
+          this.setState({ id: e.target.value }, this.renderHQ);
+        }
+        render() {
+          let { deptIds, id } = this.state;
+          return (
+            <div>
+              <div>
+                <select value={id} onChange={this.change}>
+                  {deptIds &&
+                    Object.keys(deptIds).map(value => {
+                      return <option value={value}>{value}</option>;
+                    })}
+                </select>
+              </div>
+              <div id='HQ'> </div>
+            </div>
+          );
+        }
+      }
+
+      var efcinstance = ReactDOM.render(
+        <EFCApp />,
+        document.getElementById('root')
+      );
+      //const efcinstance = new EFCApp();
+    </script>
+
+    <script>
+      ZOHODESK.onload(() => {
+        try {
+          let deptId = ZOHODESK.get(
+            'departmentMapper.' + ZOHODESK.get('routing.paramMap.deptName')
+          );
+
+          console.log(
+            'ZOHODESK',
+            ZOHODESK,
+            ZOHODESK.get && ZOHODESK.renderContainer
+          );
+
+          console.log(efcinstance, efcinstance.loadingToggle());
+        } catch (e) {
+          console.log('error in ur html file....', e);
+        }
+      });
+    </script>
+  </body>
+</html>
