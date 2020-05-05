@@ -1,356 +1,609 @@
 <!DOCTYPE html>
-<html dir="ltr">
+<html dir='ltr'>
   <style>
-    * {
+    *
+    {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
-      background: #f5fffc;
+    body
+    {
+      background: #f5fffc 
     }
-    .main {
+    .main
+    {
       height: 100vh;
       width: 100vw;
     }
-    .header {
+    .header
+    {
       padding: 10px;
-      background: black;
+      font-weight: bold;
+      background:#106188;
       color: #ffffff;
+      border-bottom: 1px solid #ddd;
     }
-    .header::after {
-      content: "";
+    .header::after
+    {
+      content: '';
       display: block;
       clear: both;
     }
-    .tabs {
-      float: right;
-      padding-right: 20px;
+    .tabs
+    {
+        background: #106188;
+      color: #ffffff;
+      height: 100%;
+      padding-top:30px;
+      overflow: auto;
     }
-    .tabs span {
-      font-size: 13px;
-      color: #fff;
-      margin: 0px 10px;
-      padding: 2px 10px;
-      cursor: pointer;
+    .tabs span
+    {
+      display: inline-block;
+    width: 100%;
+    font-size: 13px;
+    color: #fff;
+    margin: 5px 0;
+    padding: 10px 10px 10px 20px;
+    cursor: pointer;
+      transition: all 0.5s ease;
     }
-    .sel {
-      border-bottom: 1px solid #fff;
+    .tabs span:hover
+    {
+      background: #072f42;
     }
-    .compRender {
-      height: calc(100vh - 70px);
+    .sel
+    {
+      background: #072f42;
+    }
+    .compRender
+    {
+      height: calc(100vh - 90px);
       border: 1px solid #eee;
       padding: 40px;
       background: #fff;
       margin: 20px;
+      float: left;
+      width: calc(100vw - 260px);
     }
-    #DeskApp,
-    #TicketListView {
+    #DeskApp,#TicketListView,#TicketForm, #contactForm,#accountForm,#taskForm,#callForm,#eventForm,#productForm,#HQ
+    {
       width: 100%;
       height: 100%;
       overflow: auto;
     }
 
-    .loader {
-      width: 150px;
-      height: 150px;
-      line-height: 150px;
-      margin: 100px auto;
-      position: relative;
-      box-sizing: border-box;
-      text-align: center;
-      z-index: 0;
-      text-transform: uppercase;
-    }
 
-    .loader:before,
-    .loader:after {
-      opacity: 0;
-      box-sizing: border-box;
-      content: "\0020";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 100px;
-      border: 5px solid #1cc748;
-      box-shadow: 0 0 50px #fff, inset 0 0 50px #a0f585;
-    }
 
-    .loader:after {
-      z-index: 1;
-      -webkit-animation: gogoloader 2s infinite 1s;
-    }
+      .loader {
+        width: 150px;
+        height: 150px;
+        line-height: 150px;
+        margin: 100px 200px;
+        position: relative;
+        box-sizing: border-box;
+        text-align: center;
+        z-index: 0;
+        text-transform: uppercase;
+        float: left;
+      }
 
-    .loader:before {
-      z-index: 2;
-      -webkit-animation: gogoloader 2s infinite;
-    }
-
-    @-webkit-keyframes gogoloader {
-      0% {
-        -webkit-transform: scale(0);
+      .loader:before,
+      .loader:after {
         opacity: 0;
+        box-sizing: border-box;
+        content: "\0020";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 100px;
+        border: 5px solid #1cc748;
+    box-shadow: 0 0 50px #fff, inset 0 0 50px #a0f585;
       }
-      50% {
-        opacity: 1;
+
+      .loader:after {
+        z-index: 1;
+        -webkit-animation: gogoloader 2s infinite 1s;
       }
-      100% {
-        -webkit-transform: scale(1);
-        opacity: 0;
+
+      .loader:before {
+        z-index: 2;
+        -webkit-animation: gogoloader 2s infinite;
       }
-    }
+
+      @-webkit-keyframes gogoloader {
+        0% {
+          -webkit-transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: scale(1);
+          opacity: 0;
+        }
+      }
+      container
+      {
+        height: 100%;
+        flex: 1;
+      }
+      .leftpaneldoc
+      {
+        float: left;
+        height: calc(100vh - 51px);
+        width: 220px;
+        overflow: hidden;
+        border-right: 1px solid #ddd;
+      }
+      .wh100
+      {
+        height: 100%;
+        width: 100%;
+      }
+
   </style>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.js' ></script>
   <head>
     <meta charset="UTF-8" />
     <title>EFC</title>
-    <script>
-      localStorage.clear();
-      function ZOHODESK(ZD) {
-        ZD.setConfig({
-          clientId: "1000.MGU7OQJ2LXPJ915667NYI0PUJHAFSH",
-          redirectUri: "https://vimalesan.herokuapp.com/redirect.html",
-          container: document.querySelector("#react"),
-          apiUrl: "https://deskautomation2.localzoho.com",
-          env: "localzoho",
-          organizationName: "maheshefc",
-          style: ""
-        });
-      }
-    </script>
-    <script src="https://localjs.zohostatic.com/support/build/zohodesk-efc-sdk-v1.0.0-beta.1.js"></script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+
+    <script>  
+
+
+// window.ZDShadowRoot = document.querySelector('head')
+
+        function ZOHODESK(ZD) {
+            ZD.setConfig({
+              clientId: "1000.MGU7OQJ2LXPJ915667NYI0PUJHAFSH",
+              redirectUri: "https://vimalesan.herokuapp.com/redirect.html",
+              apiUrl: 'https://deskclientapp.localzoho.com',
+              env: 'localzoho',
+              style: ``              
+            });
+          }
+</script>
+
+<script src='https://localjs.zohostatic.com/support/build/zohodesk-efc-sdk-latest.js'></script>
+
+
+</script>
+    
+    <script  src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    
+    <script src="https://github.com/babel/babel-standalone/releases/download/release-6.26.0/babel.min.js"></script>
   </head>
   <body>
     <div id="root"></div>
 
+
+  </div>
     <script type="text/babel">
-      class EFCApp extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { menu: "app", loading: true };
-          this.onChangeTab = this.onChangeTab.bind(this);
-          this.loadingToggle = this.loadingToggle.bind(this);
+    
+        class EFCApp extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {menu:'app',loading:true}
+            this.onChangeTab = this.onChangeTab.bind(this)
+            this.loadingToggle = this.loadingToggle.bind(this)
+          }
+          onChangeTab(menu)
+          {
+            this.setState({menu:menu})
+          }
+          loadingToggle()
+          {
+            this.setState({loading:false})
+          }
+      
+          
+          render() {
+            let {menu}=  this.state
+            return (
+              <main className='main'>
+                 
+                  <header className='header'> 
+                    Embeddable Functional Component   
+                  </header>
+                  <container>
+                    <div className='leftpaneldoc'>
+                        <div className='tabs'>
+                            <span onClick={this.onChangeTab.bind(this,'app')} className={menu == 'app' ? 'sel' : ''}>Desk-App</span>
+                            <span onClick={this.onChangeTab.bind(this,'ticketlookup')} className={menu == 'ticketlookup' ? 'sel' : ''}>Ticket Lookup</span>
+                            <span onClick={this.onChangeTab.bind(this,'ticketlist')} className={menu == 'ticketlist' ? 'sel' : ''}>Ticket-List</span>
+                            <span onClick={this.onChangeTab.bind(this,'ticketdetail')} className={menu == 'ticketdetail' ? 'sel' : ''}>Ticket-Detail</span>
+                            <span onClick={this.onChangeTab.bind(this,'HQ')} className={menu == 'HQ' ? 'sel' : ''}>HQ</span>
+                            <span onClick={this.onChangeTab.bind(this,'approval')} className={menu == 'approval' ? 'sel' : ''}>Approval</span>
+                            <span onClick={this.onChangeTab.bind(this,'ticketForm')} className={menu == 'ticketForm' ? 'sel' : ''}>Ticket AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'contactForm')} className={menu == 'contactForm' ? 'sel' : ''}>Contact AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'accountForm')} className={menu == 'accountForm' ? 'sel' : ''}>Account AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'taskForm')} className={menu == 'taskForm' ? 'sel' : ''}>Task AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'callForm')} className={menu == 'callForm' ? 'sel' : ''}>Call AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'eventForm')} className={menu == 'eventForm' ? 'sel' : ''}>Event AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'productForm')} className={menu == 'productForm' ? 'sel' : ''}>Product AddForm</span>
+                            <span onClick={this.onChangeTab.bind(this,'DepartmentDropdown')} className={menu == 'DepartmentDropdown' ? 'sel' : ''}>Department Dropdown </span>
+                            
+                        </div>
+                    </div>
+                  {
+                    this.state.loading ?  <div className="loader">Loading</div> : 
+                                        
+                                      <div className='compRender'>
+
+                                          {
+                                            menu == 'app' ? <DeskApp /> : 
+                                            menu == 'ticketlookup' ? <TicketLookup /> : 
+                                            menu == 'ticketlist' ? <TicketList /> : 
+                                            menu == 'ticketdetail' ? <TicketDetail /> :
+                                            menu == 'approval' ? <Approval /> :
+                                            menu == 'ticketForm' ? <TicketForm /> :
+                                            menu == 'accountForm' ? <AccountForm /> : 
+                                            menu == 'contactForm' ? <ContactForm /> :
+                                            menu == 'taskForm' ? <TaskForm /> :
+                                            menu == 'callForm' ? <CallForm /> :
+                                            menu == 'eventForm' ? <EventForm /> :
+                                            menu == 'productForm' ? <ProductForm /> :
+                                            menu == 'DepartmentDropdown' ? <DepartmentDropdown /> :
+                                            menu == 'HQ' ? <HQ /> :  null
+                                          }
+                                      </div>
+                  }
+                  </container>
+              </main>
+            );
+          }
         }
-        onChangeTab(menu) {
-          this.setState({ menu: menu });
+
+
+
+        class DeskApp extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('DeskApp',{},document.getElementById('DeskApp')).then(()=>{
+              console.log('renderrender')
+            });
+          }
+          
+          render() {
+            return (
+              <div id='DeskApp'> </div>
+            );
+          }
         }
-        loadingToggle() {
-          this.setState({ loading: false });
+        
+
+        class DepartmentDropdown extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('DepartmentDropdown',{},document.getElementById('DepartmentDropdown'));
+          }
+          
+          render() {
+            return (
+              <div id='DepartmentDropdown'> </div>
+            );
+          }
         }
-        render() {
-          let { menu } = this.state;
-          console.log(window.loading, "window.loading ");
-          return (
-            <main className="main">
-              <header className="header">
-                ZohoDesk Embeddable
-                <div className="tabs">
-                  <span
-                    onClick={this.onChangeTab.bind(this, "app")}
-                    className={menu == "app" ? "sel" : ""}
-                  >
-                    Desk-App
-                  </span>
-                  <span
-                    onClick={this.onChangeTab.bind(this, "ticketlist")}
-                    className={menu == "ticketlist" ? "sel" : ""}
-                  >
-                    Ticket-List
-                  </span>
-                  {/*<span
-                    onClick={this.onChangeTab.bind(this, "ticketdetail")}
-                    className={menu == "ticketdetail" ? "sel" : ""}
-                  >
-                    Ticket-Detail
-                  </span>*/}
-                  <span
-                    onClick={this.onChangeTab.bind(this, "HQ")}
-                    className={menu == "HQ" ? "sel" : ""}
-                  >
-                    HQ
-                  </span>
+
+        class Approval extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('Approval',{ticketId:3263000004903001},document.getElementById('Approval'));
+          }
+          
+          render() {
+            return (
+              <div id='Approval'> </div>
+            );
+          }
+        }
+
+        class TicketForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+           
+            var ins = ZOHODESK.renderContainer('TicketAddForm',{ },document.getElementById('TicketForm'),()=>{
+              console.log(ins,'=====ins')
+            });
+          }
+          render() {
+            return (
+              <div id='TicketForm'> </div>
+            );
+          }
+        }
+        class ProductForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('ProductAddForm',{},document.getElementById('productForm'));
+          }
+          render() {
+            return (
+              <div id='productForm'> </div>
+            );
+          }
+        }
+        class CallForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.routeTo({pathname:'/awesome/Black-Widow/calls/new',state:{} })
+            ZOHODESK.renderContainer('CallAddForm',{},document.getElementById('callForm'));
+          }
+          render() {
+            return (
+              <div id='callForm'> </div>
+            );
+          }
+        }
+        class EventForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('EventAddForm',{},document.getElementById('eventForm'));
+          }
+          render() {
+            return (
+              <div id='eventForm'> </div>
+            );
+          }
+        }
+        class ContactForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('ContactAddForm',{},document.getElementById('contactForm'));
+          }
+          render() {
+            return (
+              <div id='contactForm'> </div>
+            );
+          }
+        }
+
+        class TaskForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('TaskAddForm',{},document.getElementById('taskForm'));
+          }
+          render() {
+            return (
+              <div id='taskForm'> </div>
+            );
+          }
+        }
+
+        class AccountForm extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('AccountAddForm',{},document.getElementById('accountForm'));
+          }
+          render() {
+            return (
+              <div id='accountForm'> </div>
+            );
+          }
+        }
+
+        class TicketList extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('TicketListView',{},document.getElementById('TicketListView'));
+          }
+          render() {
+            return (
+              <div id='TicketListView'> </div>
+            );
+          }
+        }
+
+        class TicketLookup extends React.Component {
+          constructor(props) {
+            super(props);
+          }
+          componentDidMount()
+          {
+            ZOHODESK.renderContainer('TicketLookup',{deptId:"3263000003283042",onSelect: (id)=>{console.log(id,'====id')} },document.getElementById('TicketLookup'));
+          }
+          render() {
+            return (
+              <div id='TicketLookup'> </div>
+            );
+          }
+        }
+
+
+        class TicketDetail extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {id:null,ticListIds:{}}
+            this.renderDetails = this.renderDetails.bind(this)
+            this.change = this.change.bind(this)
+            
+          }
+          componentDidMount()
+          {
+
+            let ids = ZOHODESK.get(`module.ticket`) || {}
+            this.setState({ ticListIds : ids || {}, id: ids ? Object.keys(ids)[0] : null },this.renderDetails)
+          }
+
+          renderDetails()
+          {
+            let { id} = this.state;
+            ZOHODESK.renderContainer('TicketDetailview',{id: id,setisNotAccessible:()=>{},setIsDeleted:()=>{},isCallAssociated:true},document.getElementById('DeskApp'));
+          }
+          change(e)
+          {
+            this.setState({  id: e.target.value },this.renderDetails)
+          }
+
+          render() {
+            let { ticListIds,id} = this.state;
+            return (
+              <div className="wh100">
+                <div>
+                    <select value={id} onChange={this.change}>
+                      {
+                        ticListIds && Object.keys(ticListIds).map((id)=>{
+                          return <option value={id}>{id}</option>
+                        })
+                      }
+                    </select>
                 </div>
-              </header>
-              {this.state.loading ? (
-                <div className="loader">Loading</div>
-              ) : (
-                <div className="compRender">
-                  {menu == "app" ? (
-                    <DeskApp />
-                  ) : menu == "ticketlist" ? (
-                    <TicketList />
-                  ) : menu == "ticketdetail" ? (
-                    <TicketDetail />
-                  ) : menu == "HQ" ? (
-                    <HQ />
-                  ) : null}
-                </div>
-              )}
-            </main>
-          );
-        }
-      }
-
-      class DeskApp extends React.Component {
-        constructor(props) {
-          super(props);
-        }
-        componentDidMount() {
-          ZOHODESK.renderContainer(
-            "DeskApp",
-            {},
-            document.getElementById("DeskApp")
-          );
-        }
-        componentWillUnmount() {
-          ZOHODESK.removeContainer(document.getElementById("DeskApp"));
-        }
-        render() {
-          return <div id="DeskApp"> </div>;
-        }
-      }
-      class TicketList extends React.Component {
-        constructor(props) {
-          super(props);
-        }
-        componentDidMount() {
-          ZOHODESK.renderContainer(
-            "TicketListView",
-            {},
-            document.getElementById("TicketListView")
-          );
-        }
-        render() {
-          return <div id="TicketListView"> </div>;
-        }
-        componentWillUnmount() {
-          ZOHODESK.removeContainer(document.getElementById("TicketListView"));
-        }
-      }
-      class TicketDetail extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { id: null, ticListIds: {} };
-          this.renderDetails = this.renderDetails.bind(this);
-          this.change = this.change.bind(this);
-        }
-        componentDidMount() {
-          let ids = ZOHODESK.get(`module.ticket`) || {};
-          this.setState(
-            { ticListIds: ids || {}, id: ids[0] && null },
-            this.renderDetails
-          );
-        }
-
-        renderDetails() {
-          let { id } = this.state;
-          ZOHODESK.renderContainer(
-            "TicketDetailview",
-            { id: id },
-            document.getElementById("ticketdetail")
-          );
-        }
-        componentWillUnmount() {
-          ZOHODESK.removeContainer(document.getElementById("ticketdetail"));
-        }
-        change(e) {
-          this.setState({ id: e.target.value }, this.renderDetails);
-        }
-
-        render() {
-          let { ticListIds, id } = this.state;
-          return (
-            <div>
-              <div>
-                <select value={id} onChange={this.change}>
-                  {ticListIds &&
-                    Object.keys(ticListIds).map(id => {
-                      return <option value={id}>{id}</option>;
-                    })}
-                </select>
+                <div id='DeskApp'> </div>
               </div>
-              <div id="ticketdetail"> </div>
-            </div>
-          );
+            );
+          }
         }
-      }
 
-      class HQ extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { id: null, deptIds: {} };
-          this.renderHQ = this.renderHQ.bind(this);
-          this.change = this.change.bind(this);
-        }
-        componentDidMount() {
-          let deptIdsObj = ZOHODESK.get(`departmentMapper`) || {};
-          this.setState(
-            { deptIds: deptIdsObj, id: deptIdsObj[0] || null },
-            this.renderHQ
-          );
-        }
-        renderHQ() {
-          let { id } = this.state;
-          ZOHODESK.removeContainer(document.getElementById("HQ"));
-          ZOHODESK.renderContainer(
-            "HQDashboard",
-            { deptName: "" },
-            document.getElementById("HQ")
-          );
-        }
-        componentWillUnmount() {
-          ZOHODESK.removeContainer(document.getElementById("HQ"));
-        }
-        change(e) {
-          this.setState({ id: e.target.value }, this.renderHQ);
-        }
-        render() {
-          let { deptIds, id } = this.state;
-          return (
-            <div>
-              <div>
-                <select value={id} onChange={this.change}>
-                  {deptIds &&
-                    Object.keys(deptIds).map(value => {
-                      return <option value={value}>{value}</option>;
-                    })}
-                </select>
+        class HQ extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {id:null,deptIds:{}}
+            this.renderHQ = this.renderHQ.bind(this)
+            this.change = this.change.bind(this)
+          }
+          componentDidMount()
+          {
+            let deptIdsObj = ZOHODESK.get(`departmentMapper`) || {};
+            this.setState({deptIds:deptIdsObj,id:deptIdsObj[0] || null},this.renderHQ)
+          }
+          renderHQ()
+          {
+            let { id} = this.state;
+            ZOHODESK.removeContainer(document.getElementById('HQ'))
+            ZOHODESK.renderContainer('HQDashboard', { deptName: '' } ,document.getElementById('HQ'));
+          }
+          change(e)
+          {
+            this.setState({  id: e.target.value },this.renderHQ)
+          }
+          render() {
+            let { deptIds,id} = this.state;
+            return (
+              <div className='wh100'>
+                  <div>
+                      <select value={id} onChange={this.change}>
+                          {
+                            deptIds && Object.keys(deptIds).map((value)=>{
+                              return <option value={value}>{value}</option>
+                            })
+                          }
+                      </select>
+                  </div>
+                  <div id='HQ'> </div>
               </div>
-              <div id="HQ"> </div>
-            </div>
-          );
+            );
+          }
         }
-      }
 
-      var efcinstance = ReactDOM.render(
-        <EFCApp />,
-        document.getElementById("root")
-      );
-      //const efcinstance = new EFCApp();
+
+
+
+        var efcinstance = ReactDOM.render(<EFCApp/>,document.getElementById('root'));
+        //const efcinstance = new EFCApp(); 
+       
     </script>
+    
 
     <script>
-      ZOHODESK.onload(() => {
-        try {
-          let deptId = ZOHODESK.get(
-            "departmentMapper." + ZOHODESK.get("routing.paramMap.deptName")
-          );
+        ZOHODESK.onload(() => {
+          try {
 
-          console.log(
-            "ZOHODESK",
-            ZOHODESK,
-            ZOHODESK.get && ZOHODESK.renderContainer
-          );
 
-          console.log(efcinstance, efcinstance.loadingToggle());
-        } catch (e) {
-          console.log("error in ur html file....", e);
-        }
-      });
-    </script>
+            // ZOHODESK.on('urlChange',(type,data)=>{
+            //   let ticModuleName =  ZOHODESK.get('moduleMeta.tickets.sanitizedName')
+            //           let pathname = data.location.pathname || ''
+            //             if (  (ticModuleName == pathname.split('/')[4]) ) 
+            //                 {
+            //                       return true
+            //                 }
+            //             else
+            //             {
+            //                       return false 
+            //             }
+            // })
+
+
+              ZOHODESK.on('formsubmit',(type,data)=>{
+                console.log(type,data,'====type,data')
+              return false
+            })
+
+
+           
+
+
+
+            // ZOHODESK.urlChange = (type,data)=>{
+            //           let ticModuleName =  ZOHODESK.get('moduleMeta.tickets.sanitizedName')
+            //           let pathname = data.location.pathname || ''
+            //             if (  (ticModuleName == pathname.split('/')[4]) ) 
+            //                 {
+            //                       return new Promise((res,rej)=>{
+            //                         res()
+            //                         })    
+            //                   }
+            //             else
+            //             {
+            //               return new Promise((res,rej)=>{
+            //                         rej('Not ticketmodule....!!!!')
+            //                         })    
+            //             }
+            // }
+
+            let deptId = ZOHODESK.get(
+              'departmentMapper.' + ZOHODESK.get('routing.paramMap.deptName')
+            );
+
+
+
+            console.log(efcinstance,efcinstance.loadingToggle())
+
+
+          } catch (e) {
+            console.log('error in ur html file....', e);
+          }
+        });
+  </script>
+  
   </body>
 </html>
